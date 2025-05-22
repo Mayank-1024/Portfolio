@@ -54,6 +54,34 @@ export default function Portfolio() {
     },
   ]
 
+  const sendToSheet = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  
+    const form = e.currentTarget
+  
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    }
+  
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwEuHQvPAXyM9fzKxka1NrZqoZu3oSHDJZQgl3AJ2rEI0jyLQtxBNVFdVetr2bFZwmalw/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+  
+    if (res.ok) {
+      alert("Submitted successfully!")
+      form.reset()
+    } else {
+      alert("Submission failed!")
+    }
+  }
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Purple gradient effects */}
@@ -111,7 +139,7 @@ export default function Portfolio() {
             <div className="flex flex-col items-center max-w-4xl mx-auto">
               {/* Hero content with improved spacing and organization */}
               <div className="relative mb-8 p-6 rounded-xl bg-black/30 backdrop-blur-md border border-purple-900/30 hover:border-purple-700/50 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-transparent rounded-xl"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/10 to-transparent rounded-xl"></div>
                 <div className="relative z-10 text-center space-y-4">
                   <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none">
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
@@ -180,7 +208,7 @@ export default function Portfolio() {
                     asChild
                     className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 border-0 hover:scale-105 transition-all duration-300"
                   >
-                    <Link href="/resume.pdf" target="_blank">
+                    <Link href="/Mayank_Bhadrasen_MS_Updated.pdf" target="_blank" rel="noopener noreferrer">
                       Download Resume
                     </Link>
                   </Button>
@@ -188,7 +216,7 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="relative rounded-xl overflow-hidden border border-purple-900/50 bg-black/50 backdrop-blur-sm group transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent"></div>
                 <Image
                   src="/images/profile-photo.jpeg"
                   width={600}
@@ -217,25 +245,25 @@ export default function Portfolio() {
             <div className="mx-auto grid max-w-5xl items-center gap-8 py-8 lg:grid-cols-3">
               {/* Project 1 */}
               <Card className="bg-black/50 border border-purple-900/50 backdrop-blur-sm overflow-hidden group hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70 transition-all duration-300 hover:-translate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
-                  <CardTitle className="text-white">Xade – Crypto Dashboard dApp</CardTitle>
-                  <CardDescription className="text-gray-400">React.js, Material UI, Web3</CardDescription>
+                  <CardTitle className="text-white">Uniswap V2 – Token Swap UI</CardTitle>
+                  <CardDescription className="text-gray-400">Next.js, TypeScript, Tailwind CSS, ethers.js, Chart.js</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="relative overflow-hidden rounded-lg border border-purple-900/30">
                     <Image
-                      src="/images/xade-dashboard.png"
+                      src="/images/uniswap-v2-dashboard.png"
                       width={500}
                       height={300}
-                      alt="Xade Crypto Dashboard"
+                      alt="Uniswap V2 UI"
                       className="rounded-lg object-cover w-full h-48 transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>
                   <p className="mt-4 text-sm text-gray-400">
-                    Personal Web3 project to enhance the UI/UX of the Xade platform. Built a responsive crypto dashboard
-                    with real-time data using CoinMarketCap API, Wagmi, and RainbowKit.
+                    Built a decentralized token swap interface and analytics dashboard with wallet connection, token selection,
+                    liquidity visualization (x*y=k), swap execution, and historical price charts.
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -246,7 +274,11 @@ export default function Portfolio() {
                       asChild
                       className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
                     >
-                      <Link href="#" target="_blank">
+                      <Link 
+                      href="https://mayankuniswapv2-ui.vercel.app/" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 group-hover:text-purple-400 transition-colors">
                         Demo
                       </Link>
                     </Button>
@@ -256,7 +288,7 @@ export default function Portfolio() {
                       asChild
                       className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
                     >
-                      <Link href="#" target="_blank">
+                      <Link href="https://github.com/Mayank-1024/UniswapV2" target="_blank">
                         Code
                       </Link>
                     </Button>
@@ -264,9 +296,10 @@ export default function Portfolio() {
                 </CardFooter>
               </Card>
 
+
               {/* Project 2 */}
               <Card className="bg-black/50 border border-purple-900/50 backdrop-blur-sm overflow-hidden group hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70 transition-all duration-300 hover:-translate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
                   <CardTitle className="text-white">NexTap – NFC Wallet System</CardTitle>
                   <CardDescription className="text-gray-400">React, TypeScript, Tailwind CSS</CardDescription>
@@ -280,7 +313,7 @@ export default function Portfolio() {
                       alt="NexTap NFC Wallet"
                       className="rounded-lg object-cover w-full h-48 transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>
                   <p className="mt-4 text-sm text-gray-400">
                     Built a decentralized wallet system using NFC cards and QR codes for login, wallet creation, and
@@ -289,23 +322,14 @@ export default function Portfolio() {
                 </CardContent>
                 <CardFooter>
                   <div className="flex space-x-2">
+                  
                     <Button
                       size="sm"
                       variant="outline"
                       asChild
                       className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
                     >
-                      <Link href="#" target="_blank">
-                        Demo
-                      </Link>
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      asChild
-                      className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
-                    >
-                      <Link href="#" target="_blank">
+                      <Link href="https://github.com/Mayank-1024/NexTap-NFC-App" target="_blank">
                         Code
                       </Link>
                     </Button>
@@ -315,7 +339,7 @@ export default function Portfolio() {
 
               {/* Project 3 */}
               <Card className="bg-black/50 border border-purple-900/50 backdrop-blur-sm overflow-hidden group hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70 transition-all duration-300 hover:-translate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
                   <CardTitle className="text-white">Emergency Alert App</CardTitle>
                   <CardDescription className="text-gray-400">Java (Swing), Twilio API</CardDescription>
@@ -329,7 +353,7 @@ export default function Portfolio() {
                       alt="Emergency Alert App"
                       className="rounded-lg object-cover w-full h-48 transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>
                   <p className="mt-4 text-sm text-gray-400">
                     Created a cross-platform safety app that sends location-based SOS alerts via SMS and email,
@@ -338,23 +362,14 @@ export default function Portfolio() {
                 </CardContent>
                 <CardFooter>
                   <div className="flex space-x-2">
+                    
                     <Button
                       size="sm"
                       variant="outline"
                       asChild
                       className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
                     >
-                      <Link href="#" target="_blank">
-                        Demo
-                      </Link>
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      asChild
-                      className="border-purple-700 text-purple-400 hover:bg-purple-900/30 hover:scale-105 transition-all duration-300"
-                    >
-                      <Link href="#" target="_blank">
+                      <Link href="https://github.com/Mayank-1024/EmergencyAlert_App" target="_blank">
                         Code
                       </Link>
                     </Button>
@@ -439,7 +454,7 @@ export default function Portfolio() {
             <div className="mx-auto grid max-w-5xl gap-8 py-8 lg:grid-cols-2">
               {/* Education 1 */}
               <Card className="bg-black/50 border border-purple-900/50 backdrop-blur-sm overflow-hidden group transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
                   <CardTitle className="text-white">Master of Science in Information Systems</CardTitle>
                   <CardDescription className="text-purple-400">2024 - 2026</CardDescription>
@@ -455,7 +470,7 @@ export default function Portfolio() {
 
               {/* Education 2 */}
               <Card className="bg-black/50 border border-purple-900/50 backdrop-blur-sm overflow-hidden group transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
                   <CardTitle className="text-white">Bachelor of Engineering in Information Technology</CardTitle>
                   <CardDescription className="text-purple-400">2017 - 2021</CardDescription>
@@ -474,7 +489,7 @@ export default function Portfolio() {
         {/* Contact Section */}
         <AnimatedSection id="contact" className="w-full py-20 md:py-32 relative">
           <SectionParticles sectionId="contact" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent -z-10"></div>
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-purple-900/5 to-transparent -z-10"></div>
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <div className="space-y-2">
@@ -543,7 +558,7 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="space-y-6 bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-purple-900/30 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/20 hover:border-purple-700/70">
-                <form className="space-y-4">
+                <form onSubmit={sendToSheet} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-gray-300">
