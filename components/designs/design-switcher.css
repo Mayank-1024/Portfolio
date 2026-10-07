@@ -1,0 +1,52 @@
+.ds {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 4px 4px 14px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  background: rgba(12, 12, 16, 0.8);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #fff;
+  font: 13px/1 var(--font-jetbrains), ui-monospace, monospace;
+}
+.ds__label {
+  margin-right: 4px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.ds__tab {
+  padding: 8px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 0.2s, color 0.2s;
+}
+.ds__tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.ds__tab[aria-current="page"] {
+  background: #fff;
+  color: #000;
+}
+.ds__key {
+  margin-right: 6px;
+  font-size: 10px;
+  opacity: 0.5;
+}
+@media (max-width: 480px) {
+  .ds__label,
+  .ds__key {
+    display: none;
+  }
+}

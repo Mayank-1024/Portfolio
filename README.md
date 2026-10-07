@@ -1,42 +1,48 @@
-# Mayank Bhadrasen – Personal Portfolio
+# Mayank Bhadrasen — Portfolio
 
-Welcome to my portfolio website! This is a modern, responsive, and dark-themed web portfolio built using **Next.js App Router**, **Tailwind CSS**, and **TypeScript**. It highlights my background, projects, experience, and contact information in an elegant and performant format.
+Personal site for [mayankbhadrasen.com](https://mayankbhadrasen.com): full-stack developer & AI automation engineer, co-founder of [Qixazow](https://qixazow.com).
 
-## 🌐 Live Website
-👉 [mayankbhadrasen.vercel.app](https://mayankbhadrasen.vercel.app)
+Two candidate designs are live side by side while one is chosen; switch with the tab bar or keys `1` / `2`:
 
----
+| Design | URL | Idea |
+| --- | --- | --- |
+| On-Chain | `/?design=onchain` | A Three.js chain of blocks, one per section; experience as a block-explorer feed. |
+| Blueprint | `/?design=blueprint` | A self-drawing wireframe room on a drafting sheet; career drawn as a building elevation. |
 
-## 🔧 Tech Stack
+## Stack
 
-- **Framework**: [Next.js 13+ (App Router)](https://nextjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: Custom components + ShadCN
-- **Animations**: Framer Motion, Typewriter, Particle Background
-- **Languages**: TypeScript, JSX/TSX
-- **Deployment**: [Vercel](https://vercel.com/)
+Next.js 15 (App Router) · React 19 · TypeScript · Three.js · GSAP (ScrollTrigger, SplitText) · Lenis · plain scoped CSS.
 
----
+## Develop
 
-## 🚀 Features
+```bash
+yarn          # install
+yarn dev      # http://localhost:3000
+yarn build    # production build (also type-checks)
+```
 
-- 🎯 Interactive landing page with smooth scroll and animated sections
-- 🧑‍💼 Experience and education timeline
-- 📂 Projects section with hover effects and tech stack info
-- 📫 Functional contact form (Email integration supported)
-- 🌙 Dark-themed UI with modern gradients and effects
+## Where things live
 
----
+```
+app/                     layout, fonts, global reset, page that hosts the designs
+components/designs/
+  onchain/               On-Chain design + its Three.js scene + scoped CSS
+  blueprint/             Blueprint design + its Three.js scene + scoped CSS
+  design-switcher.tsx    the floating tab bar
+lib/
+  content.ts             ALL portfolio copy — edit this to update both designs
+  motion.tsx             GSAP/Lenis helpers shared by the designs
+  contact.ts             contact form submission
+scripts/contact-mailer.gs  Google Apps Script that emails form submissions
+public/                  images and GradResume_Mayank.pdf
+```
 
-## 📂 Project Structure
+## Contact form
 
-portfolio/
-├── app/ # App Router pages and layout
-│ ├── layout.tsx
-│ └── page.tsx
-├── components/ # Reusable UI components
-├── public/ # Static assets (images, icons)
-├── styles/ # Global styles
-├── tailwind.config.ts
-├── next.config.mjs
-└── package.json
+The form posts to a Google Apps Script web app that emails each submission to the site owner and (optionally) logs it to a Sheet. Setup steps are at the top of `scripts/contact-mailer.gs`. Point the site at the deployment with:
+
+```bash
+NEXT_PUBLIC_CONTACT_ENDPOINT=https://script.google.com/macros/s/…/exec
+```
+
+Motion respects `prefers-reduced-motion`; pointer effects only run on mouse/trackpad devices.
