@@ -31,7 +31,6 @@ import { StackSection } from "./stack-section"
 import "./onchain.css"
 
 const BLOCKS: ChainBlock[] = [
-  { id: "top", label: "Genesis" },
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "stack", label: "Stack" },
@@ -41,7 +40,7 @@ const BLOCKS: ChainBlock[] = [
   { id: "contact", label: "Contact" },
 ]
 
-const NAV = BLOCKS.slice(1)
+const NAV = BLOCKS
 
 const short = (h: string) => `${h.slice(0, 8)}…${h.slice(-4)}`
 
@@ -170,6 +169,14 @@ export function OnChain() {
   const root = useRef<HTMLDivElement>(null)
   const lenis = useLenis()
   const height = useBlockHeight()
+
+  // Old links from the design-comparison phase carried ?design=…; drop it so the address stays clean.
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    if (!url.searchParams.has("design")) return
+    url.searchParams.delete("design")
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash)
+  }, [])
   const { status, error, onSubmit } = useContactForm()
 
   useGSAP(

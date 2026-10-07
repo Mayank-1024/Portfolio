@@ -34,7 +34,7 @@ function faceTexture(index: number, label: string, font: string) {
   g.fillStyle = "rgba(238,236,232,.55)"
   g.font = `500 30px ${font}`
   g.fillText("BLOCK", 44, 82)
-  g.fillStyle = index === 0 ? "#f3dcaa" : "#e2b867"
+  g.fillStyle = "#e2b867"
   g.font = `700 112px ${font}`
   g.fillText(`#${index.toString(16).padStart(2, "0")}`, 40, 220)
   g.fillStyle = "#eeece8"
@@ -49,7 +49,7 @@ function faceTexture(index: number, label: string, font: string) {
     hash += ((h >>> 0) % 16).toString(16)
   }
   g.fillText(hash, 44, 410)
-  g.fillStyle = index === 0 ? "#f3dcaa" : "#e2b867"
+  g.fillStyle = "#e2b867"
   g.beginPath()
   g.arc(458, 70, 12, 0, Math.PI * 2)
   g.fill()
@@ -89,7 +89,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
     scene.add(rim)
 
     const chain = new THREE.Group()
-    chain.position.set(small ? 0 : 2.4, small ? 2.2 : 1.3, 0)
+    chain.position.set(small ? 0 : 1.1, small ? 2.2 : 1.3, 0)
     scene.add(chain)
 
     const font = getComputedStyle(document.body).getPropertyValue("--font-jetbrains") || "monospace"
@@ -99,12 +99,12 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
     const sideMat = new THREE.MeshStandardMaterial({ color: "#181a21", metalness: 0.5, roughness: 0.4, emissive: "#22252e", emissiveIntensity: 0.4 })
     const disposables: { dispose: () => void }[] = [boxGeo, edgeGeo, sideMat]
 
-    const spacing = small ? 2.4 : 2.9
+    const spacing = small ? 2.3 : 2.45
     const items = blocks.map((b, i) => {
-      const tex = faceTexture(i, b.label, font)
+      const tex = faceTexture(i + 1, b.label, font)
       const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.2, roughness: 0.5, emissive: "#ffffff", emissiveMap: tex, emissiveIntensity: 0.7 })
       const mesh = new THREE.Mesh(boxGeo, [faceMat, faceMat, sideMat, sideMat, faceMat, faceMat])
-      const edgeMat = new THREE.LineBasicMaterial({ color: i === 0 ? SIGNAL : ACCENT, transparent: true, opacity: 0.9 })
+      const edgeMat = new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.9 })
       const edges = new THREE.LineSegments(edgeGeo, edgeMat)
       const halo = new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending }))
       halo.scale.setScalar(1.12)
@@ -160,6 +160,34 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
       renderer.domElement.style.height = "100%"
       camera.aspect = w / h
       camera.updateProjectionMatrix()
+      fit()
+    }
+
+    // Shrink the whole chain (keeping its proportions) until the first and last blocks, at rest, sit inside the frame.
+    const probe = new THREE.Object3D()
+    const pv = new THREE.Vector3()
+    const fit = () => {
+      const z = camera.position.z
+      camera.position.z = 16
+      camera.updateMatrixWorld()
+      const n = items.length
+      const mid = (n - 1) / 2
+      const inFrame = (scale: number) => {
+        probe.position.copy(chain.position)
+        probe.rotation.set(0.12, -0.35, -0.12)
+        probe.scale.setScalar(scale)
+        probe.updateMatrixWorld()
+        return [0, n - 1].every((i) =>
+          [-1.25, 1.25].every((dx) => {
+            pv.set((i - mid) * spacing + dx, Math.sin(i * 1.1) * 0.6, Math.cos(i * 0.8) * 1.2).applyMatrix4(probe.matrixWorld).project(camera)
+            return Math.abs(pv.x) <= 0.93
+          }),
+        )
+      }
+      let scale = 1
+      while (scale > 0.5 && !inFrame(scale)) scale -= 0.02
+      chain.scale.setScalar(scale)
+      camera.position.z = z
     }
     resize()
     window.addEventListener("resize", resize)
@@ -219,7 +247,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
         const want = hovered === i ? 1 : 0
         it.hover += (want - it.hover) * 0.12
         it.g.scale.setScalar((0.35 + 0.65 * it.lock) * (1 + it.hover * 0.14))
-        it.edgeMat.color.copy(i === 0 ? SIGNAL : ACCENT).lerp(SIGNAL, it.hover)
+        it.edgeMat.color.copy(ACCENT).lerp(SIGNAL, it.hover)
       })
 
       for (let i = 0; i < items.length - 1; i++) {
@@ -270,7 +298,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
       items.forEach((it, i) => {
         const face = (it.mesh.material as THREE.MeshStandardMaterial[])[4]
         const old = face.map
-        const tex = faceTexture(i, blocks[i].label, f)
+        const tex = faceTexture(i + 1, blocks[i].label, f)
         face.map = tex
         face.emissiveMap = tex
         face.needsUpdate = true
