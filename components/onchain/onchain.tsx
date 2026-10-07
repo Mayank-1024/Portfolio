@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowDownRight, ArrowUpRight, Check, Download, Github, Linkedin, Mail } from "lucide-react"
 
 import { education, experience, profile, projects, publication, socials, stats, venture, type Role } from "@/lib/content"
@@ -633,6 +634,9 @@ export function OnChain() {
           © {new Date().getFullYear()} {profile.name}
         </span>
         <span className="oc-dim">block #{height.toLocaleString("en-US")} · built with Next.js, Three.js &amp; GSAP</span>
+        <Link href="/privacy" className="oc-foot__link">
+          Privacy policy
+        </Link>
       </footer>
     </div>
   )

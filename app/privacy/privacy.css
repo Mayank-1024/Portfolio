@@ -1,0 +1,72 @@
+/* Privacy policy: the On-Chain palette in a plain reading layout. */
+.pp {
+  --bg: #0b0c0f;
+  --line: rgba(228, 230, 236, 0.09);
+  --text: #eeece8;
+  --soft: #cfced0;
+  --muted: #9b9ca3;
+  --dim: #60636c;
+  --accent: #e2b867;
+  --accent-2: #f0d49c;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+  --sans: var(--font-grotesk), system-ui, sans-serif;
+
+  min-height: 100vh;
+  background: radial-gradient(600px 400px at 0% 0%, rgba(110, 130, 170, 0.12), transparent 70%), var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+}
+.pp ::selection { background: var(--accent); color: #17130b; }
+.pp-mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; }
+.pp-dim { color: var(--dim); }
+.pp-accent { color: var(--accent); }
+
+.pp-nav {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px clamp(16px, 4vw, 40px); background: rgba(11, 12, 15, 0.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.pp-brand { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; }
+.pp-brand__mark {
+  display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid rgba(226, 184, 103, 0.45); border-radius: 8px;
+  color: var(--accent); background: rgba(226, 184, 103, 0.08); font-weight: 700;
+}
+.pp-back { font-family: var(--mono); font-size: 12.5px; color: var(--muted); transition: color 0.2s; }
+.pp-back:hover { color: var(--accent); }
+
+.pp-main { max-width: 720px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) clamp(16px, 4vw, 40px) 40px; }
+.pp-main h1 { margin-top: 12px; font-size: clamp(40px, 6vw, 60px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; }
+.pp-lead { margin-top: 20px; font-size: 19px; line-height: 1.65; color: var(--soft); }
+.pp-main section { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
+.pp-main h2 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; }
+.pp-main p, .pp-main li { margin-top: 12px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
+.pp-main ul { margin-top: 4px; padding-left: 4px; }
+.pp-main li { position: relative; margin-top: 6px; padding-left: 20px; }
+.pp-main li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+.pp-main a { color: var(--accent-2); border-bottom: 1px solid rgba(226, 184, 103, 0.4); transition: color 0.2s, border-color 0.2s; }
+.pp-main a:hover { color: var(--accent); border-color: var(--accent); }
+
+.pp-foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; max-width: 720px; margin: 40px auto 0;
+  padding: 26px clamp(16px, 4vw, 40px) 40px; border-top: 1px solid var(--line); color: var(--muted);
+}
+.pp-foot a:hover { color: var(--accent); }
+
+/* At-a-glance summary */
+.pp-glance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+.pp-glance > div { display: grid; gap: 6px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(23, 25, 31, 0.6); }
+.pp-glance strong { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.pp-glance span { color: var(--soft); font-size: 15px; line-height: 1.5; }
+
+/* Third-party services */
+.pp-services { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.pp-service { display: grid; align-content: start; gap: 4px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(23, 25, 31, 0.6); }
+.pp-service h3 { font-size: 16px; font-weight: 600; line-height: 1.35; }
+.pp-service .pp-mono { margin-top: 0; font-size: 11.5px; }
+.pp-service dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin-top: 10px; }
+.pp-service dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); padding-top: 3px; }
+.pp-service dd { color: var(--soft); font-size: 14.5px; line-height: 1.55; }
+.pp-service a.pp-mono { justify-self: start; margin-top: 10px; font-size: 12px; }
+
+@media (max-width: 720px) {
+  .pp-glance, .pp-services { grid-template-columns: 1fr; }
+}

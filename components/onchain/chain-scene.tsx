@@ -99,7 +99,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
     const sideMat = new THREE.MeshStandardMaterial({ color: "#181a21", metalness: 0.5, roughness: 0.4, emissive: "#22252e", emissiveIntensity: 0.4 })
     const disposables: { dispose: () => void }[] = [boxGeo, edgeGeo, sideMat]
 
-    const spacing = small ? 2.4 : 2.6
+    const spacing = small ? 2.6 : 2.9
     const items = blocks.map((b, i) => {
       const tex = faceTexture(i + 1, b.label, font)
       const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.2, roughness: 0.5, emissive: "#ffffff", emissiveMap: tex, emissiveIntensity: 0.7 })
@@ -124,7 +124,10 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
     const railGeo = new THREE.BufferGeometry()
     railGeo.setAttribute("position", new THREE.BufferAttribute(railPos, 3))
     const railMat = new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.45 })
-    chain.add(new THREE.LineSegments(railGeo, railMat))
+    const rails = new THREE.LineSegments(railGeo, railMat)
+    // The rail points are rewritten every frame, so the bounds computed on the first frame are stale; never cull them.
+    rails.frustumCulled = false
+    chain.add(rails)
     disposables.push(railGeo, railMat)
 
     // Data packets riding the rails.
@@ -273,7 +276,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
         }
       }
       railGeo.attributes.position.needsUpdate = true
-      railMat.opacity = 0.45 * intro.links
+      railMat.opacity = 0.7 * intro.links
 
       packets.forEach((p) => {
         p.t = (p.t + 0.006) % 1

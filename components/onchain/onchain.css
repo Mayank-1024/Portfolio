@@ -337,6 +337,8 @@
 @keyframes oc-fade { from { opacity: 0; transform: scale(0.96); } }
 
 .oc-foot { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; max-width: 1180px; margin: 120px auto 0; padding: 26px clamp(16px, 4vw, 40px); border-top: 1px solid var(--line); color: var(--muted); }
+.oc-foot__link { color: var(--soft); border-bottom: 1px solid var(--line-strong); transition: color 0.2s, border-color 0.2s; }
+.oc-foot__link:hover { color: var(--accent); border-color: var(--accent); }
 
 /* Stack: a bento of four tiles, each with its own texture and motion */
 .oc-stack { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-areas: "int int int int data data" "cloud cloud lang lang lang lang"; gap: 16px; }
