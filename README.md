@@ -2,16 +2,11 @@
 
 Personal site for [mayankbhadrasen.com](https://mayankbhadrasen.com): full-stack developer & AI automation engineer, co-founder of [Qixazow](https://qixazow.com).
 
-Two candidate designs are live side by side while one is chosen; switch with the tab bar or keys `1` / `2`:
-
-| Design | URL | Idea |
-| --- | --- | --- |
-| On-Chain | `/?design=onchain` | A Three.js chain of blocks, one per section; experience as a block-explorer feed. |
-| Blueprint | `/?design=blueprint` | A self-drawing wireframe room on a drafting sheet; career drawn as a building elevation. |
+The "On-Chain" design: a Three.js chain of blocks in the hero (one block per section, click to jump), experience as stacked blocks that each draw a wireframe scene of what was built there, an interactive Stack bento showing where each tool was used, and an obsidian + champagne-gold palette.
 
 ## Stack
 
-Next.js 15 (App Router) · React 19 · TypeScript · Three.js · GSAP (ScrollTrigger, SplitText) · Lenis · plain scoped CSS.
+Next.js 15 (App Router) · React 19 · TypeScript · Three.js · GSAP (ScrollTrigger, SplitText) · Lenis · Simple Icons · plain scoped CSS.
 
 ## Develop
 
@@ -24,22 +19,26 @@ yarn build    # production build (also type-checks)
 ## Where things live
 
 ```
-app/                     layout, fonts, global reset, page that hosts the designs
-components/designs/
-  onchain/               On-Chain design + its Three.js scene + scoped CSS
-  blueprint/             Blueprint design + its Three.js scene + scoped CSS
-  design-switcher.tsx    the floating tab bar
+app/                       layout, fonts, global reset, home page
+components/onchain/
+  onchain.tsx              the page: sections, GSAP choreography
+  chain-scene.tsx          hero 3D block chain
+  wire-scene.tsx           engine for the self-drawing experience scenes
+  experience-scenes.ts     one line drawing per role
+  stack-section.tsx        interactive skills bento
+  onchain.css              all styles; palette tokens at the top
 lib/
-  content.ts             ALL portfolio copy — edit this to update both designs
-  motion.tsx             GSAP/Lenis helpers shared by the designs
-  contact.ts             contact form submission
+  content.ts               ALL portfolio copy — edit this to update the site
+  motion.tsx               GSAP/Lenis helpers
+  ink.ts                   line-drawing geometry helper
+  contact.ts               contact form submission
 scripts/contact-mailer.gs  Google Apps Script that emails form submissions
-public/                  images and GradResume_Mayank.pdf
+public/                    images and GradResume_Mayank.pdf
 ```
 
 ## Contact form
 
-The form posts to a Google Apps Script web app that emails each submission to the site owner and (optionally) logs it to a Sheet. Setup steps are at the top of `scripts/contact-mailer.gs`. Point the site at the deployment with:
+The form posts to a Google Apps Script web app that emails each submission to the site owner and logs it to a Sheet. Setup steps are at the top of `scripts/contact-mailer.gs`. Point the site at the deployment with:
 
 ```bash
 NEXT_PUBLIC_CONTACT_ENDPOINT=https://script.google.com/macros/s/…/exec

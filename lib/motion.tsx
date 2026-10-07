@@ -64,9 +64,6 @@ export function splitReveal(el: Element, by: "lines" | "words" | "chars", from: 
   })
 }
 
-/** Left-to-right "plotter" wipe, as clip-path from/to pairs. */
-export const WIPE_FROM = { clipPath: "inset(0% 100% 0% 0%)" }
-export const WIPE_TO = { clipPath: "inset(0% 0% 0% 0%)" }
 
 /** Counts every number inside `el` up from zero, keeping the surrounding text ("30–40%", "+12.0 m"). */
 export function countUp(el: HTMLElement, vars: gsap.TweenVars = {}) {

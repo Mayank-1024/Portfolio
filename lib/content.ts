@@ -5,7 +5,6 @@ export const profile = {
   firstName: "Mayank",
   lastName: "Bhadrasen",
   role: "Full-Stack Developer & AI Automation Engineer",
-  roleShort: ["Full-Stack Developer", "AI Automation Engineer"],
   tagline: "I build the product, and the automations behind it.",
   location: "Boston, MA",
   email: "bhadrasen.m@northeastern.edu",
@@ -259,29 +258,4 @@ export const skills: SkillGroup[] = [
       { name: "Chart.js", icon: "siChartdotjs", used: ["uniswap"] },
     ],
   },
-]
-
-export const marquee = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "n8n",
-  "Claude",
-  "Docker",
-  "Django",
-  "Solidity",
-  "OAuth 2.0",
-  "Webhooks",
-  "Three.js",
-  "D3.js",
-  "Firebase",
-  "AWS",
-]
-
-export const nav = [
-  { id: "about", label: "About" },
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" },
 ]
