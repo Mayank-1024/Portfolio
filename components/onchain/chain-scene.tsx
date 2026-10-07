@@ -99,7 +99,7 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
     const sideMat = new THREE.MeshStandardMaterial({ color: "#181a21", metalness: 0.5, roughness: 0.4, emissive: "#22252e", emissiveIntensity: 0.4 })
     const disposables: { dispose: () => void }[] = [boxGeo, edgeGeo, sideMat]
 
-    const spacing = small ? 2.3 : 2.45
+    const spacing = small ? 2.4 : 2.6
     const items = blocks.map((b, i) => {
       const tex = faceTexture(i + 1, b.label, font)
       const faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.2, roughness: 0.5, emissive: "#ffffff", emissiveMap: tex, emissiveIntensity: 0.7 })
@@ -163,30 +163,41 @@ export function ChainScene({ blocks, onSelect }: { blocks: ChainBlock[]; onSelec
       fit()
     }
 
-    // Shrink the whole chain (keeping its proportions) until the first and last blocks, at rest, sit inside the frame.
+    // Pick the largest scale (up to full size) and a horizontal position at which the first and last blocks,
+    // at rest, both sit inside the frame. Prefer staying right of centre, clear of the headline.
     const probe = new THREE.Object3D()
     const pv = new THREE.Vector3()
+    const baseX = chain.position.x
     const fit = () => {
       const z = camera.position.z
       camera.position.z = 16
       camera.updateMatrixWorld()
       const n = items.length
       const mid = (n - 1) / 2
-      const inFrame = (scale: number) => {
-        probe.position.copy(chain.position)
+      const inFrame = (scale: number, x: number) => {
+        probe.position.set(x, chain.position.y, chain.position.z)
         probe.rotation.set(0.12, -0.35, -0.12)
         probe.scale.setScalar(scale)
         probe.updateMatrixWorld()
         return [0, n - 1].every((i) =>
           [-1.25, 1.25].every((dx) => {
             pv.set((i - mid) * spacing + dx, Math.sin(i * 1.1) * 0.6, Math.cos(i * 0.8) * 1.2).applyMatrix4(probe.matrixWorld).project(camera)
-            return Math.abs(pv.x) <= 0.93
+            return Math.abs(pv.x) <= 0.95
           }),
         )
       }
+      const offsets = Array.from({ length: 41 }, (_, k) => baseX - 2 + k * 0.1).sort((a, b) => Math.abs(a - baseX) - Math.abs(b - baseX))
       let scale = 1
-      while (scale > 0.5 && !inFrame(scale)) scale -= 0.02
+      let x = baseX
+      search: for (; scale > 0.5; scale -= 0.02) {
+        for (const o of offsets)
+          if (inFrame(scale, o)) {
+            x = o
+            break search
+          }
+      }
       chain.scale.setScalar(scale)
+      chain.position.x = x
       camera.position.z = z
     }
     resize()

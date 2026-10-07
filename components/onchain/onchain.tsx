@@ -35,12 +35,12 @@ const BLOCKS: ChainBlock[] = [
   { id: "experience", label: "Experience" },
   { id: "stack", label: "Stack" },
   { id: "education", label: "Education" },
-  { id: "qixazow", label: "Qixazow" },
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ]
 
-const NAV = BLOCKS
+// The nav lists every section; the hero chain leaves Qixazow out.
+const NAV = [...BLOCKS.slice(0, 4), { id: "qixazow", label: "Qixazow" }, ...BLOCKS.slice(4)]
 
 const short = (h: string) => `${h.slice(0, 8)}…${h.slice(-4)}`
 
@@ -330,9 +330,6 @@ export function OnChain() {
       <section className="oc-hero">
         <ChainScene blocks={BLOCKS} onSelect={(id) => scrollToId(lenis.current, id)} />
         <div className="oc-hero__content">
-          <div className="oc-mono oc-hero__label" data-intro>
-            <span className="oc-chip oc-chip--signal">Block #000 · Genesis</span>
-          </div>
           <h1 className="oc-h1">
             {profile.firstName}
             <br />
