@@ -1,12 +1,13 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Bot, Braces, ChartSpline, Cloud, Container, Database, KeyRound, Network, Server, Webhook, Workflow, type LucideIcon } from "lucide-react"
+import { Bot, Braces, FlaskConical, ChartSpline, Cloud, Container, Database, KeyRound, Network, Server, Webhook, Workflow, type LucideIcon } from "lucide-react"
 import {
   siChartdotjs,
   siD3,
   siDjango,
   siDocker,
+  siFigma,
   siFirebase,
   siGithub,
   siGithubactions,
@@ -32,11 +33,11 @@ import { skills, type Skill, type UsedIn } from "@/lib/content"
 import { bindSpotlight, FINE_POINTER, gsap, MOTION_OK, ScrollTrigger, useGSAP } from "@/lib/motion"
 
 const BRANDS: Record<string, SimpleIcon> = {
-  siChartdotjs, siD3, siDjango, siDocker, siFirebase, siGithub, siGithubactions, siJavascript, siJsonwebtokens, siMongodb,
+  siChartdotjs, siD3, siDjango, siDocker, siFigma, siFirebase, siGithub, siGithubactions, siJavascript, siJsonwebtokens, siMongodb,
   siN8n, siNextdotjs, siNodedotjs, siOpenjdk, siPostman, siPython, siReact, siRedux, siSolidity, siSqlite, siTypescript, siVercel,
 }
 // Generic tools have no brand mark.
-const GENERIC: Record<string, LucideIcon> = { bot: Bot, network: Network, webhook: Webhook, key: KeyRound, database: Database, cloud: Cloud, server: Server }
+const GENERIC: Record<string, LucideIcon> = { test: FlaskConical, bot: Bot, network: Network, webhook: Webhook, key: KeyRound, database: Database, cloud: Cloud, server: Server }
 const GROUP_ICONS: LucideIcon[] = [Workflow, Braces, Container, ChartSpline]
 
 const USED: Record<UsedIn, { label: string; href: string }> = {
@@ -44,9 +45,9 @@ const USED: Record<UsedIn, { label: string; href: string }> = {
   veraai: { label: "VeraAI", href: "#exp-veraai" },
   aess: { label: "AESS", href: "#exp-aess" },
   appright: { label: "Appright", href: "#exp-appright" },
-  uniswap: { label: "Uniswap V2", href: "#work" },
-  nextap: { label: "NexTap", href: "#work" },
-  emergency: { label: "Emergency Alert", href: "#work" },
+  uniswap: { label: "Uniswap V2", href: "#projects" },
+  nextap: { label: "NexTap", href: "#projects" },
+  emergency: { label: "Emergency Alert", href: "#projects" },
   northeastern: { label: "M.S. coursework", href: "#education" },
 }
 

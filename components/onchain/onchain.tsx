@@ -26,7 +26,7 @@ import {
 import { honeypotProps, useContactForm } from "@/lib/contact"
 import { ChainScene, type ChainBlock } from "./chain-scene"
 import { WireScene } from "./wire-scene"
-import { EXPERIENCE_SCENES } from "./experience-scenes"
+import { EDUCATION_SCENES, EXPERIENCE_SCENES } from "./experience-scenes"
 import { StackSection } from "./stack-section"
 import "./onchain.css"
 
@@ -37,7 +37,7 @@ const BLOCKS: ChainBlock[] = [
   { id: "stack", label: "Stack" },
   { id: "education", label: "Education" },
   { id: "qixazow", label: "Qixazow" },
-  { id: "work", label: "Work" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ]
 
@@ -224,7 +224,7 @@ export function OnChain() {
         group(".oc-about__text > *")
         group(".oc-stat")
         group(".oc-card", { y: 80, rotationX: -8, transformPerspective: 900 })
-        group(".oc-block")
+        group(".oc-edu-item", { y: 60 })
         group(".oc-contact__info > *")
         group(".oc-form > *", { y: 24, stagger: 0.06 })
 
@@ -305,8 +305,17 @@ export function OnChain() {
             </a>
           ))}
         </nav>
-        <div className="oc-net oc-mono" title="Block height (just for fun)">
-          <span className="oc-pulse" /> mainnet · #{height.toLocaleString("en-US")}
+        <div className="oc-nav__end">
+          <div className="oc-net oc-mono" title="Block height (just for fun)">
+            <span className="oc-pulse" /> mainnet · #{height.toLocaleString("en-US")}
+          </div>
+          <a href="#contact" className="oc-cta">
+            <span className="oc-cta__links" aria-hidden="true">
+              <i />
+              <i />
+            </span>
+            Work with me
+          </a>
         </div>
       </header>
 
@@ -329,11 +338,11 @@ export function OnChain() {
             {profile.tagline}
           </p>
           <div className="oc-hero__ctas" data-intro>
-            <a href="#work" className="oc-btn oc-btn--primary">
-              View work <ArrowDownRight size={16} />
+            <a href="#projects" className="oc-btn oc-btn--primary">
+              View projects <ArrowDownRight size={16} />
             </a>
             <a href="#contact" className="oc-btn">
-              Get in touch
+              Work with me
             </a>
             <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="oc-btn oc-btn--ghost">
               <Download size={15} /> Resume
@@ -425,21 +434,52 @@ export function OnChain() {
       <section id="education" className="oc-section">
         <SectionHead index={4} label="Foundation" title="Education" />
         <div className="oc-edu">
-          {education.map((e) => (
-            <div key={e.school} className="oc-block">
-              <span className="oc-mono oc-dim">{e.period}</span>
-              <h3>{e.degree}</h3>
-              <p className="oc-block__school">
-                {e.school}, {e.location}
-              </p>
-              <p className="oc-mono oc-block__detail">{e.detail}</p>
-            </div>
+          {education.map((e, i) => (
+            <article key={e.id} className={`oc-edu-item oc-edu-item--${e.id}`}>
+              <div className="oc-edu__scene">
+                <div className="oc-exp__bar oc-mono">
+                  <span>Foundation #{String(i + 1).padStart(2, "0")}</span>
+                  <span className="oc-dim">render · {e.id}</span>
+                </div>
+                <WireScene build={EDUCATION_SCENES[e.id]} />
+                <i className="oc-tick oc-tick--tl" />
+                <i className="oc-tick oc-tick--tr" />
+                <i className="oc-tick oc-tick--bl" />
+                <i className="oc-tick oc-tick--br" />
+              </div>
+              <div className="oc-edu__info">
+                <span className="oc-mono oc-dim">{e.period}</span>
+                <h3>{e.degree}</h3>
+                <p className="oc-edu__school">
+                  {e.school}, {e.location}
+                </p>
+                <p className="oc-edu__detail">{e.detail}</p>
+                <ul className="oc-tags">
+                  {e.focus.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           ))}
-          <div className="oc-block oc-block--pub">
-            <span className="oc-mono oc-signal">Publication · {publication.date}</span>
-            <h3>“{publication.title}”</h3>
-            <p className="oc-mono oc-block__detail">{publication.venue}</p>
-          </div>
+          <article className="oc-edu-item oc-edu-item--journal">
+            <div className="oc-edu__scene">
+              <div className="oc-exp__bar oc-mono">
+                <span>Publication</span>
+                <span className="oc-dim">render · ijisrt</span>
+              </div>
+              <WireScene build={EDUCATION_SCENES.journal} />
+              <i className="oc-tick oc-tick--tl" />
+              <i className="oc-tick oc-tick--tr" />
+              <i className="oc-tick oc-tick--bl" />
+              <i className="oc-tick oc-tick--br" />
+            </div>
+            <div className="oc-edu__info">
+              <span className="oc-mono oc-signal">Publication · {publication.date}</span>
+              <h3 className="oc-edu__pub">“{publication.title}”</h3>
+              <p className="oc-mono oc-dim">{publication.venue}</p>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -473,8 +513,8 @@ export function OnChain() {
       </section>
 
       {/* ── Work ─────────────────────────────────────────── */}
-      <section id="work" className="oc-section">
-        <SectionHead index={6} label="Deployed contracts" title="Selected work" sub="Things I've shipped, with the code to prove it." />
+      <section id="projects" className="oc-section">
+        <SectionHead index={6} label="Deployed contracts" title="Projects" sub="Things I've shipped, with the code to prove it." />
         <div className="oc-projects">
           {projects.map((p) => (
             <article key={p.slug} className="oc-card" data-scramble-host>

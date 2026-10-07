@@ -77,6 +77,19 @@
 .oc-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 0 rgba(240, 212, 156, 0.6); animation: oc-pulse 1.8s infinite; display: inline-block; }
 @keyframes oc-pulse { 70% { box-shadow: 0 0 0 8px rgba(240, 212, 156, 0); } 100% { box-shadow: 0 0 0 0 rgba(240, 212, 156, 0); } }
 
+.oc-nav__end { display: flex; align-items: center; gap: 10px; }
+.oc-cta {
+  display: inline-flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px 0 12px;
+  border: 1px solid rgba(226, 184, 103, 0.55); border-radius: 999px; background: rgba(226, 184, 103, 0.08);
+  color: var(--accent-2); font-family: var(--mono); font-size: 12.5px; white-space: nowrap; transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.oc-cta:hover { background: var(--accent); border-color: var(--accent); color: #17130b; }
+.oc-cta__links { position: relative; display: inline-block; width: 22px; height: 12px; }
+.oc-cta__links i { position: absolute; top: 1px; width: 13px; height: 9px; border: 1.6px solid currentColor; border-radius: 5px; transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.oc-cta__links i:first-child { left: 0; transform: translateX(-2px) rotate(-12deg); }
+.oc-cta__links i:last-child { right: 0; transform: translateX(2px) rotate(-12deg); }
+.oc-cta:hover .oc-cta__links i { transform: translateX(0) rotate(0deg); }
+
 /* ── Hero ── */
 .oc-hero { position: relative; height: 100svh; min-height: 640px; display: flex; align-items: flex-end; }
 .oc-scene { position: absolute; inset: 0; z-index: 1; }
@@ -269,14 +282,25 @@
 .oc-spinner { display: inline-block; width: 10px; height: 10px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: oc-spin 0.7s linear infinite; }
 
 
-/* Education */
-.oc-edu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.oc-block { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); transition: border-color 0.3s; }
-.oc-block:hover { border-color: var(--line-strong); }
-.oc-block h3 { margin-top: 12px; font-size: 21px; font-weight: 600; line-height: 1.3; letter-spacing: -0.015em; }
-.oc-block__school { margin-top: 8px; color: var(--soft); }
-.oc-block__detail { margin-top: 14px; color: var(--muted); line-height: 1.6; }
-.oc-block--pub h3 { font-size: 17px; font-weight: 500; }
+/* Education: a large Northeastern scene beside two smaller ones */
+.oc-edu { display: grid; grid-template-columns: 1.45fr 1fr; grid-template-areas: "northeastern sgsits" "northeastern journal"; gap: 16px; }
+.oc-edu-item { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--panel); transition: border-color 0.3s; }
+.oc-edu-item:hover { border-color: var(--line-strong); }
+.oc-edu-item--northeastern { grid-area: northeastern; }
+.oc-edu-item--sgsits { grid-area: sgsits; }
+.oc-edu-item--journal { grid-area: journal; }
+.oc-edu__scene { position: relative; flex: none; aspect-ratio: 16 / 10; border-bottom: 1px solid var(--line);
+  background: radial-gradient(70% 60% at 50% 45%, rgba(110, 130, 170, 0.12), transparent 70%), linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 32px 32px, var(--bg-2); }
+.oc-edu-item--northeastern .oc-edu__scene { aspect-ratio: auto; flex: 1; min-height: 420px; }
+.oc-edu__scene .oc-tick { z-index: 2; border-color: var(--accent); }
+.oc-edu-item:not(.oc-edu-item--northeastern) .oc-wire__legend { grid-template-columns: 1fr; gap: 4px; padding-top: 22px; }
+.oc-edu__info { display: grid; gap: 6px; padding: 20px 22px 22px; }
+.oc-edu__info h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
+.oc-edu__school { color: var(--accent-2); }
+.oc-edu__detail { color: var(--soft); font-size: 15px; line-height: 1.55; }
+.oc-edu__info .oc-tags { margin-top: 8px; }
+.oc-edu__pub { font-size: 16px !important; font-weight: 500 !important; }
+
 
 /* Contact */
 .oc-contact { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(28px, 5vw, 64px); }
@@ -366,16 +390,22 @@
 .oc-used:hover { background: var(--accent); color: #17130b; }
 
 /* ── Responsive ── */
+@media (max-width: 1200px) {
+  .oc-net { display: none; }
+}
 @media (max-width: 1000px) {
+  .oc-edu { grid-template-columns: 1fr 1fr; grid-template-areas: "northeastern northeastern" "sgsits journal"; }
   .oc-nav__links { display: none; }
-  .oc-projects, .oc-edu { grid-template-columns: 1fr 1fr; }
-  .oc-stats { grid-template-columns: 1fr 1fr; }
+  .oc-projects,   .oc-stats { grid-template-columns: 1fr 1fr; }
   .oc-exp, .oc-exp.is-flip { grid-template-columns: 1fr; }
   .oc-stack { grid-template-columns: 1fr 1fr; grid-template-areas: "int int" "lang lang" "cloud data"; }
   .oc-tile--1 .oc-tokens { grid-template-columns: repeat(4, 1fr); }
   .oc-exp.is-flip .oc-exp__scene { order: 0; }
 }
 @media (max-width: 720px) {
+  .oc-edu { grid-template-columns: 1fr; grid-template-areas: "northeastern" "sgsits" "journal"; }
+  .oc-edu-item--northeastern .oc-edu__scene { min-height: 0; flex: none; aspect-ratio: 4 / 5; }
+  .oc-edu__scene { aspect-ratio: 4 / 4; }
   .oc-stack { grid-template-columns: 1fr; grid-template-areas: "int" "lang" "cloud" "data"; }
   .oc-tile--1 .oc-tokens { grid-template-columns: repeat(3, 1fr); }
   .oc-tile--0 .oc-tokens li + li::before { display: none; }

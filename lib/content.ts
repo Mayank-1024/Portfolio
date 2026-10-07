@@ -11,8 +11,8 @@ export const profile = {
   photo: "/images/profile-photo.jpeg",
   resume: "/GradResume_Mayank.pdf",
   summary: [
-    "I'm a full-stack engineer with 3 years of experience shipping React and Next.js products, secure API integrations and the workflows that connect them. I'm finishing an M.S. in Information Systems at Northeastern University.",
-    "I've been the technical point of contact on platform migrations and API delivery, working across engineering, product and business teams. These days I run self-hosted n8n in Docker and build agentic automations that connect LLMs, APIs and business systems.",
+    "I'm an engineer with nearly 4 years of experience in API integration, workflow orchestration and customer-facing technical delivery, and I'm completing an M.S. in Information Systems at Northeastern University.",
+    "I've been the technical point of contact on platform migrations and API delivery across engineering, product and business stakeholders, building secure integrations. I run self-hosted n8n in Docker and build agentic automations that connect LLMs, APIs and business systems.",
   ],
 }
 
@@ -24,7 +24,7 @@ export const socials = {
 }
 
 export const stats = [
-  { value: "3+", label: "years shipping production software" },
+  { value: "~4", label: "years of API integration and technical delivery" },
   { value: "30-40%", label: "faster deployments via structured API validation" },
   { value: "60%", label: "less code redundancy from a shared component library" },
   { value: "20+", label: "HR admins on an access-control layer I designed" },
@@ -141,7 +141,7 @@ export const experience: Role[] = [
     title: "Assistant Manager, Front-End Development",
     company: "AESS Solutions Pvt. Ltd.",
     location: "Bhopal, India",
-    period: "Nov 2022 - Nov 2023",
+    period: "Nov 2022 - Aug 2024",
     bullets: [
       "Technical point of contact for the PeopleSol HRMS migration from .NET to React: discovery, phased cutover and stakeholder trade-offs.",
       "Improved deployment efficiency 30-40% by owning API testing, integrations and production bug triage.",
@@ -167,20 +167,35 @@ export const experience: Role[] = [
   },
 ]
 
-export const education = [
+export type Education = {
+  id: "northeastern" | "sgsits"
+  degree: string
+  school: string
+  location: string
+  period: string
+  detail: string
+  /** Focus areas shown as chips. */
+  focus: string[]
+}
+
+export const education: Education[] = [
   {
+    id: "northeastern",
     degree: "M.S., Information Systems",
     school: "Northeastern University",
     location: "Boston, MA",
-    period: "2024 - 2026",
-    detail: "Application Engineering · Web UX · Cryptocurrency & Smart Contract Engineering",
+    period: "2024 - Dec 2026",
+    detail: "Building AI automation into real systems: agentic workflows, LLM integrations and the engineering around them.",
+    focus: ["AI automation", "Agentic workflows", "n8n + LLM integrations", "Self-Improving AI", "Application Engineering", "Web UX", "Smart Contract Engineering"],
   },
   {
+    id: "sgsits",
     degree: "B.E., Information Technology",
     school: "Shri G. S. Institute of Technology and Science",
     location: "Indore, India",
     period: "2017 - 2021",
-    detail: "Web Engineering · Data Structures · Artificial Intelligence",
+    detail: "Foundations in software engineering, from data structures to the web.",
+    focus: ["Web Engineering", "Data Structures", "Artificial Intelligence"],
   },
 ]
 
@@ -215,6 +230,7 @@ export const skills: SkillGroup[] = [
       { name: "OAuth 2.0", icon: "key", used: ["appright"] },
       { name: "JWT", icon: "siJsonwebtokens", used: ["appright"] },
       { name: "Postman", icon: "siPostman", used: ["appright"] },
+      { name: "API testing & validation", icon: "test", used: ["aess", "appright"] },
     ],
   },
   {
@@ -256,6 +272,7 @@ export const skills: SkillGroup[] = [
       { name: "Firestore", icon: "siFirebase", used: ["veraai"] },
       { name: "D3.js", icon: "siD3", used: ["aess"] },
       { name: "Chart.js", icon: "siChartdotjs", used: ["uniswap"] },
+      { name: "Figma", icon: "siFigma", used: [] },
     ],
   },
 ]

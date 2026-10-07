@@ -1,6 +1,7 @@
 import * as THREE from "three"
 import { Ink } from "@/lib/ink"
 import type { WireSpec } from "./wire-scene"
+import { letter } from "./lettering"
 
 // Line colours, matched to the On-Chain palette in onchain.css.
 const BONE = "#e6e7eb"
@@ -363,3 +364,192 @@ export const EXPERIENCE_SCENES = {
 } as const
 
 export type ExperienceSceneId = keyof typeof EXPERIENCE_SCENES
+
+/* ════ Education & publication ═══════════════════════════════════════════ */
+
+/* ── Northeastern: campus hall with a cupola, the wordmark on the lawn, and an AI automation corner ── */
+export function northeasternScene(): WireSpec {
+  const grid = floorGrid(4.6, 3.4)
+  const hall = new Ink()
+  hall.box(5.6, 1.9, 1.4, 0, 0, -2.0)
+  for (const y of [0.35, 1.15])
+    for (let x = -2.5; x <= 2.5; x += 0.55) if (Math.abs(x) > 1.05) hall.rect(x - 0.14, y, x + 0.14, y + 0.45, -1.29)
+  const portico = new Ink()
+  for (const x of [-0.75, -0.25, 0.25, 0.75]) portico.line([x, 0.15, -1.0], [x, 1.6, -1.0])
+  portico.box(2.1, 0.15, 0.45, 0, 1.6, -1.12)
+  portico.path([[-1.05, 1.75, -0.9], [0, 2.35, -0.9], [1.05, 1.75, -0.9], [-1.05, 1.75, -0.9]])
+  portico.box(2.4, 0.08, 0.7, 0, 0, -0.95)
+  portico.box(2.2, 0.08, 0.5, 0, 0.08, -1.0)
+  const cupola = new Ink()
+  cupola.box(0.8, 0.85, 0.8, 0, 1.9, -2.0)
+  cupola.rect(-0.18, 2.1, 0.18, 2.55, -1.59)
+  cupola.geo(new THREE.ConeGeometry(0.62, 0.7, 4), [0, 3.1, -2.0], [0, Math.PI / 4, 0], 1)
+
+  const word = new Ink()
+  letter(word, "NORTHEASTERN", { at: [1.2, 0.05, 1.3], size: 0.36 })
+
+  // AI automation corner: a trigger feeds an agent node, which drives an output; a model floats above.
+  const flow = new Ink()
+  flow.box(0.6, 0.24, 0.5, -3.7, 0, 2.6)
+  flow.box(0.6, 0.24, 0.5, -1.7, 0, 0.6)
+  const agent = new Ink()
+  agent.box(0.9, 0.32, 0.7, -3.6, 0, 0.5)
+  agent.geo(new THREE.IcosahedronGeometry(0.36, 0), [-3.6, 1.15, 0.5])
+  dashed(agent, [-3.6, 0.33, 0.5], [-3.6, 0.8, 0.5], 5)
+  const wires = new Ink()
+  const pIn: V3[] = [[-3.7, 0.12, 2.35], [-3.7, 0.12, 1.5], [-3.6, 0.12, 0.85]]
+  const pOut: V3[] = [[-3.15, 0.16, 0.5], [-2.4, 0.16, 0.55], [-2.0, 0.12, 0.6]]
+  wires.path(pIn)
+  wires.path(pOut)
+
+  return {
+    view: 3.9,
+    target: [-0.2, 0.9, 0.2],
+    layers: [
+      { ink: grid, color: BONE, opacity: 0.08, at: [0, 0.2] },
+      { ink: hall, color: BONE, opacity: 0.85, at: [0.04, 0.38] },
+      { ink: portico, color: BONE, at: [0.25, 0.48] },
+      { ink: cupola, color: ACCENT, opacity: 1, at: [0.38, 0.56] },
+      { ink: word, color: ACCENT, opacity: 1, at: [0.48, 0.86] },
+      { ink: flow, color: BONE, at: [0.6, 0.76] },
+      { ink: wires, color: BONE, opacity: 0.6, at: [0.68, 0.84] },
+      { ink: agent, color: SIGNAL, opacity: 1, at: [0.74, 0.96] },
+    ],
+    flows: [{ points: [...pIn, ...pOut], color: SIGNAL, count: 2, speed: 0.2 }],
+    notes: [
+      { anchor: [0, 3.45, -2.0], title: "Northeastern University", body: "M.S. Information Systems, Boston" },
+      { anchor: [-3.6, 1.5, 0.5], title: "AI automation", body: "Agentic workflows · LLM agents" },
+      { anchor: [-1.7, 0.24, 0.6], title: "Automation in practice", body: "n8n pipelines and integrations" },
+    ],
+  }
+}
+
+/* ── SGSITS: a domed campus block, the wordmark, and an IT workstation ── */
+export function sgsitsScene(): WireSpec {
+  const grid = floorGrid(4.6, 3.4)
+  const block = new Ink()
+  block.box(6.2, 1.5, 1.3, 0, 0, -2.1)
+  for (let x = -2.7; x <= 2.7; x += 0.6) {
+    if (Math.abs(x) < 0.75) continue
+    for (const y of [0.25, 0.9]) {
+      block.line([x - 0.15, y, -1.44], [x - 0.15, y + 0.3, -1.44])
+      block.line([x + 0.15, y, -1.44], [x + 0.15, y + 0.3, -1.44])
+      wallCircleHalf(block, [x, y + 0.3, -1.44], 0.15)
+    }
+  }
+  const tower = new Ink()
+  tower.box(1.2, 2.5, 1.2, 0, 0, -2.0)
+  tower.rect(-0.25, 0, 0.25, 0.8, -1.39)
+  wallCircleHalf(tower, [0, 0.8, -1.39], 0.25)
+  tower.geo(new THREE.SphereGeometry(0.62, 10, 4, 0, Math.PI * 2, 0, Math.PI / 2), [0, 2.5, -2.0], [0, 0, 0], 1)
+
+  const word = new Ink()
+  letter(word, "SGSITS", { at: [1.3, 0.05, 1.4], size: 0.5 })
+
+  const desk = new Ink()
+  desk.box(1.5, 0.05, 0.75, -3.0, 0.7, 1.0)
+  for (const [x, z] of [[-3.7, 0.68], [-2.3, 0.68], [-3.7, 1.32], [-2.3, 1.32]]) desk.line([x, 0, z], [x, 0.7, z])
+  desk.box(1.0, 0.6, 0.05, -3.0, 0.82, 0.75)
+  desk.box(0.6, 0.03, 0.22, -3.0, 0.76, 1.15)
+  const code = new Ink()
+  ;[0.5, 0.75, 0.62, 0.4].forEach((w, i) => code.line([-3.38, 1.3 - i * 0.12, 0.79], [-3.38 + w, 1.3 - i * 0.12, 0.79]))
+
+  return {
+    view: 5.0,
+    target: [0, 1.45, 0],
+    layers: [
+      { ink: grid, color: BONE, opacity: 0.08, at: [0, 0.2] },
+      { ink: block, color: BONE, opacity: 0.85, at: [0.04, 0.42] },
+      { ink: tower, color: ACCENT, opacity: 1, at: [0.3, 0.55] },
+      { ink: word, color: ACCENT, opacity: 1, at: [0.48, 0.84] },
+      { ink: desk, color: BONE, mode: "drop", at: [0.7, 0.86] },
+      { ink: code, color: SIGNAL, opacity: 1, at: [0.84, 1] },
+    ],
+    notes: [
+      { anchor: [0, 3.15, -2.0], title: "SGSITS, Indore", body: "B.E. Information Technology" },
+      { anchor: [-3.0, 1.42, 0.75], title: "Coursework", body: "Web engineering · DSA · AI" },
+    ],
+  }
+}
+
+/* ── IJISRT: an open journal, a shield for AI-driven data protection, and the journal's wordmark ── */
+export function journalScene(): WireSpec {
+  const grid = floorGrid(4.6, 3.4)
+  const book = new Ink()
+  const Z0 = -1.8, Z1 = 0.6
+  for (const side of [-1, 1]) {
+    const edge = 2.2 * side
+    book.path([[0, 0.32, Z0], [edge * 0.5, 0.26, Z0], [edge, 0.12, Z0], [edge, 0.12, Z1], [edge * 0.5, 0.26, Z1], [0, 0.32, Z1]])
+    book.line([edge, 0, Z0], [edge, 0.12, Z0])
+    book.line([edge, 0, Z1], [edge, 0.12, Z1])
+  }
+  book.line([0, 0.32, Z0], [0, 0.32, Z1])
+  book.floorRect(-2.3, Z0 - 0.08, 2.3, Z1 + 0.08, 0)
+  const lines = new Ink()
+  for (let z = Z0 + 0.3; z < Z1 - 0.2; z += 0.28)
+    for (const side of [-1, 1]) lines.line([0.25 * side, 0.3, z], [(z > Z1 - 0.7 ? 1.3 : 1.9) * side, 0.17, z])
+
+  // Shield with a lock, standing above the right page and facing the camera.
+  const shield = new Ink()
+  const r = Math.PI / 4
+  const dir: V3 = [Math.cos(r), 0, -Math.sin(r)]
+  const at: V3 = [1.6, 1.0, 0.2]
+  const P = (u: number, v: number): V3 => [at[0] + dir[0] * u, at[1] + v, at[2] + dir[2] * u]
+  const outline: [number, number][] = [[-0.75, 1.9], [0, 2.15], [0.75, 1.9], [0.75, 1.0], [0.45, 0.45], [0, 0.15], [-0.45, 0.45], [-0.75, 1.0], [-0.75, 1.9]]
+  shield.path(outline.map(([u, v]) => P(u, v)))
+  shield.path(outline.map(([u, v]) => P(u * 0.82, 0.18 + v * 0.86)))
+  shield.path([[-0.28, 0.7], [0.28, 0.7], [0.28, 1.15], [-0.28, 1.15], [-0.28, 0.7]].map(([u, v]) => P(u, v)))
+  shield.path(arcUV(0, 1.15, 0.2, 0.25).map(([u, v]) => P(u, v)))
+
+  // A small neural mesh around the shield: "AI" in "AI for data protection".
+  const mesh = new Ink()
+  const nodes: V3[] = [P(-1.3, 2.4), P(-1.5, 1.4), P(-1.2, 0.6), P(1.3, 2.4), P(1.5, 1.5), P(1.2, 0.6)]
+  nodes.forEach(([x, y, z]) => mesh.geo(new THREE.OctahedronGeometry(0.09, 0), [x, y, z]))
+  ;[[0, 1], [1, 2], [3, 4], [4, 5], [0, 4], [1, 3], [2, 4], [1, 5]].forEach(([a, b]) => mesh.line(nodes[a], nodes[b]))
+
+  const word = new Ink()
+  letter(word, "IJISRT", { at: [-0.4, 0.05, 3.2], size: 0.5 })
+
+  const orbit: V3[] = Array.from({ length: 33 }, (_, i) => {
+    const a = (i / 32) * Math.PI * 2
+    return [at[0] + Math.cos(a) * 1.15, at[1] + 1.15 + Math.sin(a) * 0.15, at[2] + Math.sin(a) * 1.15]
+  })
+
+  return {
+    view: 4.8,
+    target: [0, 1.2, 0.6],
+    layers: [
+      { ink: grid, color: BONE, opacity: 0.08, at: [0, 0.2] },
+      { ink: book, color: BONE, at: [0.04, 0.36] },
+      { ink: lines, color: BONE, opacity: 0.45, at: [0.28, 0.5] },
+      { ink: word, color: ACCENT, opacity: 1, at: [0.42, 0.76] },
+      { ink: mesh, color: BONE, opacity: 0.6, at: [0.62, 0.84] },
+      { ink: shield, color: SIGNAL, mode: "drop", opacity: 1, at: [0.72, 0.94] },
+    ],
+    flows: [{ points: orbit, color: SIGNAL, count: 3, speed: 0.1 }],
+    notes: [
+      { anchor: [-1.1, 0.27, -0.6], title: "IJISRT · Vol. 8 Issue 12", body: "Published Dec 2023" },
+      { anchor: [1.6, 3.2, 0.2], title: "AI for data protection", body: "Safeguarding digital assets" },
+    ],
+  }
+}
+
+/** Upper half-circle in a wall plane (facing +z), for arches. */
+function wallCircleHalf(ink: Ink, c: V3, r: number, seg = 10) {
+  const pts: V3[] = []
+  for (let i = 0; i <= seg; i++) {
+    const a = (i / seg) * Math.PI
+    pts.push([c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, c[2]])
+  }
+  ink.path(pts)
+}
+
+/** Upper half-ellipse in (u, v) plane coordinates, for the lock shackle. */
+function arcUV(cu: number, cv: number, ru: number, rv: number, seg = 10): [number, number][] {
+  return Array.from({ length: seg + 1 }, (_, i) => {
+    const a = (i / seg) * Math.PI
+    return [cu + Math.cos(a) * ru, cv + Math.sin(a) * rv] as [number, number]
+  })
+}
+
+export const EDUCATION_SCENES = { northeastern: northeasternScene, sgsits: sgsitsScene, journal: journalScene } as const
