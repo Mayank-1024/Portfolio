@@ -2,46 +2,47 @@
 
 Personal site for [mayankbhadrasen.com](https://mayankbhadrasen.com): full-stack developer & AI automation engineer, co-founder of [Qixazow](https://qixazow.com).
 
-The "On-Chain" design: a Three.js chain of blocks in the hero (one block per section, click to jump), experience as stacked blocks that each draw a wireframe scene of what was built there, an interactive Stack bento showing where each tool was used, and an obsidian + champagne-gold palette.
+A static site: plain HTML, CSS and JavaScript with no build step. A Three.js chain of blocks in the hero (click a block to jump to its section), experience and education as blocks that each draw a wireframe scene of what was built there, an interactive Stack bento showing where each tool was used, and an obsidian + champagne-gold palette.
 
-## Stack
-
-Next.js 15 (App Router) · React 19 · TypeScript · Three.js · GSAP (ScrollTrigger, SplitText) · Lenis · Simple Icons · plain scoped CSS.
-
-## Develop
+## Run locally
 
 ```bash
-yarn          # install
-yarn dev      # http://localhost:3000
-yarn build    # production build (also type-checks)
+python3 -m http.server 3000   # then open http://localhost:3000
 ```
 
-## Where things live
+Any static server works. Open the site through a server rather than as a `file://` page, because `js/fence.js` is an ES module.
+
+## Structure
 
 ```
-app/                       layout, fonts, global reset, home page
-components/onchain/
-  onchain.tsx              the page: sections, GSAP choreography
-  chain-scene.tsx          hero 3D block chain
-  wire-scene.tsx           engine for the self-drawing experience scenes
-  experience-scenes.ts     one line drawing per role
-  stack-section.tsx        interactive skills bento
-  onchain.css              all styles; palette tokens at the top
-lib/
-  content.ts               ALL portfolio copy — edit this to update the site
-  motion.tsx               GSAP/Lenis helpers
-  ink.ts                   line-drawing geometry helper
-  contact.ts               contact form submission
-scripts/contact-mailer.gs  Google Apps Script that emails form submissions
-public/                    images and GradResume_Mayank.pdf
+index.html              the portfolio (all sections and content)
+privacy.html            privacy policy
+css/style.css           all styles: fonts, reset, portfolio (.oc-*), privacy page (.pp-*)
+js/
+  config.js             contact form endpoint
+  main.js               smooth scroll, GSAP choreography, nav, scrambles, counters, contact form
+  fence.js              Three.js: hero block chain + self-drawing wire scenes (ES module)
+  work.js               Experience status + Stack bento interactions
+  vendor/               self-hosted GSAP (ScrollTrigger, SplitText), Lenis, Three.js
+assets/
+  fonts/                Space Grotesk + JetBrains Mono (woff2)
+  logos/                skill logos (SVG, tinted via CSS mask)
+  images/               profile photo and project screenshots
+  GradResume_Mayank.pdf
+scripts/contact-mailer.gs   Google Apps Script that emails form submissions
+favicon.svg  robots.txt  sitemap.xml
 ```
+
+## Editing content
+
+All copy lives directly in `index.html`. Each skill token carries its "used at" links in `data-used`. Each wire scene is picked by its `data-scene` name, which maps to a drawing defined in `js/fence.js`.
+
+After changing CSS or JS, bump the `?v=` query on its `<link>` / `<script>` tags so browsers fetch the new file.
 
 ## Contact form
 
-The form posts to a Google Apps Script web app that emails each submission to the site owner and logs it to a Sheet. Setup steps are at the top of `scripts/contact-mailer.gs`. Point the site at the deployment with:
+The form posts to a Google Apps Script web app that emails each submission and logs it to a Sheet. Setup steps are at the top of `scripts/contact-mailer.gs`; paste the deployment's `/exec` URL into `js/config.js`.
 
-```bash
-NEXT_PUBLIC_CONTACT_ENDPOINT=https://script.google.com/macros/s/…/exec
-```
+## Libraries
 
-Motion respects `prefers-reduced-motion`; pointer effects only run on mouse/trackpad devices.
+All self-hosted in `js/vendor/`, so visitors' browsers never contact a CDN: GSAP 3.15 (ScrollTrigger, SplitText), Lenis 1.3, and Three.js 0.186 (bundled with only the classes the scenes use). Motion respects `prefers-reduced-motion`; pointer effects only run on mouse/trackpad devices.
