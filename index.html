@@ -583,7 +583,7 @@
                   type="button"
                   class="oc-token"
                   data-skill="n8n"
-                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}]'
+                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}, {"label": "Applications made easy", "href": "#projects"}, {"label": "One Pipe", "href": "#projects"}, {"label": "AI Ad Review", "href": "#projects"}]'
                   aria-describedby="used-0"
                 >
                   <span class="oc-token__icon"
@@ -600,7 +600,7 @@
                   type="button"
                   class="oc-token"
                   data-skill="LLM / agentic workflows"
-                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}, {"label": "VeraAI", "href": "#exp-veraai"}]'
+                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}, {"label": "VeraAI", "href": "#exp-veraai"}, {"label": "AI Ad Review", "href": "#projects"}]'
                   aria-describedby="used-0"
                 >
                   <span class="oc-token__icon"
@@ -631,7 +631,7 @@
                   type="button"
                   class="oc-token"
                   data-skill="REST APIs"
-                  data-used='[{"label": "Appright", "href": "#exp-appright"}, {"label": "AESS", "href": "#exp-aess"}]'
+                  data-used='[{"label": "Appright", "href": "#exp-appright"}, {"label": "AESS", "href": "#exp-aess"}, {"label": "Applications made easy", "href": "#projects"}]'
                   aria-describedby="used-0"
                 >
                   <span class="oc-token__icon"
@@ -661,7 +661,7 @@
                   type="button"
                   class="oc-token"
                   data-skill="Webhooks"
-                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}]'
+                  data-used='[{"label": "Qixazow", "href": "#exp-qixazow"}, {"label": "AI Ad Review", "href": "#projects"}]'
                   aria-describedby="used-0"
                 >
                   <span class="oc-token__icon"
@@ -1450,9 +1450,62 @@
             ><span class="oc-head__rule"></span><span class="oc-head__label">Deployed contracts</span>
           </div>
           <h2 class="oc-h2">Projects</h2>
-          <p class="oc-sub">Things I&#x27;ve shipped, with the code to prove it.</p>
+          <p class="oc-sub">Things I&#x27;ve built and shipped, newest first.</p>
         </header>
-        <div class="oc-projects">
+
+        <div class="oc-rail-bar">
+          <div class="oc-rail-progress" aria-hidden="true"><span></span></div>
+          <div class="oc-rail-nav">
+            <button type="button" class="oc-rail-btn" data-rail="prev" aria-label="Previous projects"><i class="oc-logo" style="--s:18px;-webkit-mask-image:url(assets/logos/chevron-left.svg);mask-image:url(assets/logos/chevron-left.svg)" aria-hidden="true"></i></button>
+            <button type="button" class="oc-rail-btn" data-rail="next" aria-label="Next projects"><i class="oc-logo" style="--s:18px;-webkit-mask-image:url(assets/logos/chevron-right.svg);mask-image:url(assets/logos/chevron-right.svg)" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="oc-projects" data-lenis-prevent-horizontal tabindex="0" aria-label="Projects. Scroll sideways or use the arrows to see more.">
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Workflow</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xc7f07d…32cd">0xc7f07d…32cd</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="applications" role="img" aria-label="Animated n8n workflow: a 3-day schedule reads saved jobs, fans out to Greenhouse, Ashby, Lever and remote job boards, merges and filters them, then appends new jobs and a run log to Google Sheets."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">n8n · Job search automation</span>
+              <h3>Applications made easy</h3>
+              <p>Every 3 days, collects new postings from 13 company career boards on Greenhouse, Ashby and Lever plus Remotive, RemoteOK and Jobicy, filters them by role and location, and appends only new jobs to Google Sheets with a health log. A dry run collected 3,773 jobs.</p>
+              <ul class="oc-tags"><li>n8n</li><li>JavaScript</li><li>Google Sheets</li><li>REST APIs</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><span class="oc-dim">Self-hosted n8n · runs every 3 days</span></div>
+          </article>
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Workflow</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xe3c40a…82c0">0xe3c40a…82c0</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="one-pipe" role="img" aria-label="Animated n8n workflow: a 3-day schedule pulls two Hugging Face datasets and four RSS feeds, maps them to one 16-column schema, runs quality checks and saves a CSV and a quality report."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">n8n · Data pipeline</span>
+              <h3>One Pipe</h3>
+              <p>One pipeline for any data source: pulls two Hugging Face datasets and four RSS feeds, maps every record to one 16-column schema, runs quality checks and saves a clean CSV with a quality report. A real run: 285 clean records, 94.4% complete, in about 3 seconds.</p>
+              <ul class="oc-tags"><li>n8n</li><li>JavaScript</li><li>Hugging Face</li><li>RSS</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><span class="oc-dim">Self-hosted n8n · no credentials needed</span></div>
+          </article>
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Workflow</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xcbcb67…cf47">0xcbcb67…cf47</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="ad-review" role="img" aria-label="Animated n8n workflow: a webhook receives an ad variant, a gatekeeper checks it, Claude decides approve, review or block with a rules fallback, then actions create a HubSpot task, post a Slack alert and log the outcome."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">n8n · AI routing</span>
+              <h3>AI Marketing Ad Review</h3>
+              <p>Routes AI-generated ad copy in about 6 seconds: a rules gatekeeper, then Claude scores channel fit, flags risky claims and decides approve, review or block, creating a HubSpot task and a Slack alert. 834 test requests, 0 failures, $0.0044 per ad.</p>
+              <ul class="oc-tags"><li>n8n</li><li>Claude</li><li>HubSpot</li><li>Slack</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/Madison-Project" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
           <article class="oc-card" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
               <span>Contract</span

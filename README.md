@@ -37,6 +37,8 @@ favicon.svg  robots.txt  sitemap.xml
 
 All copy lives directly in `index.html`. Each skill token carries its "used at" links in `data-used`. Each wire scene is picked by its `data-scene` name, which maps to a drawing defined in `js/fence.js`.
 
+Projects are cards in the `.oc-projects` rail, newest first. Workflow cards use a `data-flow` thumbnail: its nodes, icons (`assets/logos/`) and connections are listed in `FLOWS` in `js/work.js`, and the draw-and-run animation is generated from that list.
+
 After changing CSS or JS, bump the `?v=` query on its `<link>` / `<script>` tags so browsers fetch the new file.
 
 ## Contact form

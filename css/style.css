@@ -318,7 +318,27 @@ html.lenis body {
 .oc-venture:hover .oc-venture__cta { text-decoration: underline; text-underline-offset: 4px; }
 
 /* Projects */
-.oc-projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+/* Projects rail: snap-scrolling cards, three per view on desktop; newest first. */
+.oc-rail-bar { display: flex; align-items: center; gap: 18px; margin: -18px 0 18px; }
+.oc-rail-progress { position: relative; flex: 1; height: 1px; background: var(--line); }
+.oc-rail-progress span { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform 0.15s linear; }
+.oc-rail-nav { display: flex; gap: 8px; }
+.oc-rail-btn {
+  display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line-strong); border-radius: 10px;
+  color: var(--soft); background: rgba(11, 12, 15, 0.55); transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+}
+.oc-rail-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.oc-rail-btn:disabled { opacity: 0.35; cursor: default; }
+.oc-projects {
+  --gap: 20px;
+  display: flex; gap: var(--gap); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+  /* Room for hover lift and tilt, which the scroll container would otherwise clip. */
+  margin: -24px -14px -40px; padding: 24px 14px 40px; scroll-padding-inline: 14px;
+}
+.oc-projects::-webkit-scrollbar { display: none; }
+.oc-projects:focus-visible { outline: 1px solid var(--line-strong); outline-offset: -8px; border-radius: 18px; }
+.oc-projects.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.oc-projects > .oc-card { flex: 0 0 calc((100% - 2 * var(--gap)) / 3); scroll-snap-align: start; }
 .oc-card {
   position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; background: var(--panel);
   overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;
@@ -333,6 +353,36 @@ html.lenis body {
 .oc-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
 .oc-card:hover .oc-card__img img { transform: scale(1.06); }
 .oc-card__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11, 12, 15, 0.75), transparent 55%); }
+/* Workflow thumbnails: an n8n-style canvas that draws itself, then runs on a loop. */
+.oc-card--flow .oc-card__img { background: radial-gradient(rgba(228, 230, 236, 0.09) 1px, transparent 1.4px) 0 0 / 12px 12px, #0f1116; }
+.oc-card--flow .oc-card__img::after { background: linear-gradient(to top, rgba(11, 12, 15, 0.55), transparent 28%); }
+.oc-flow { position: absolute; inset: 0; }
+.oc-flow svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.oc-flow__edge { fill: none; stroke: rgba(228, 230, 236, 0.28); stroke-width: 0.6; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.oc-flow__edge.is-on { stroke: rgba(226, 184, 103, 0.7); }
+.oc-flow__pkt { fill: var(--signal); opacity: 0; }
+.oc-node {
+  position: absolute; width: 9.4%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  display: grid; place-items: center; border: 1px solid rgba(228, 230, 236, 0.22); border-radius: 18%;
+  background: #191b22; color: var(--soft); transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+.oc-node--trigger { border-radius: 42% 18% 18% 42%; }
+.oc-node--ai { border-color: rgba(226, 184, 103, 0.55); color: var(--accent); }
+.oc-node .oc-logo { --s: 52%; width: var(--s); height: var(--s); }
+.oc-node__label {
+  position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.01em; color: var(--muted); transition: color 0.25s;
+}
+.oc-node--label-top .oc-node__label { top: auto; bottom: calc(100% + 3px); }
+.oc-node__ok {
+  position: absolute; top: -3px; right: -3px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 2px #0f1116; transform: scale(0); transition: transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.oc-node.is-run { border-color: var(--accent); background: #241f14; color: var(--accent); }
+.oc-node.is-run .oc-node__label { color: var(--text); }
+.oc-node.is-done .oc-node__ok { transform: scale(1); }
+.oc-card--flow .oc-card__links .oc-dim { font-size: 12px; }
+
 .oc-card__body { padding: 20px 18px 0; flex: 1; }
 .oc-card__body h3 { margin-top: 6px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
 .oc-card__body p { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.6; }
@@ -523,7 +573,8 @@ html.lenis body {
 @media (max-width: 1000px) {
   .oc-edu { grid-template-columns: 1fr 1fr; grid-template-areas: "northeastern northeastern" "sgsits journal"; }
   .oc-nav__links { display: none; }
-  .oc-projects,   .oc-stats { grid-template-columns: 1fr 1fr; }
+  .oc-stats { grid-template-columns: 1fr 1fr; }
+  .oc-projects > .oc-card { flex-basis: calc((100% - var(--gap)) / 2); }
   .oc-exp, .oc-exp.is-flip { grid-template-columns: 1fr; }
   .oc-stack { grid-template-columns: 1fr 1fr; grid-template-areas: "int int" "lang lang" "cloud data"; }
   .oc-tile--1 .oc-tokens { grid-template-columns: repeat(4, 1fr); }
@@ -541,7 +592,9 @@ html.lenis body {
   .oc-exp__node { left: -28px; }
   .oc-wire__legend { grid-template-columns: 1fr; gap: 5px; padding-top: 24px; }
   .oc-exp__scene { aspect-ratio: 4 / 5; }
-  .oc-about, .oc-contact, .oc-projects, .oc-edu, .oc-venture__pillars, .oc-form__row { grid-template-columns: 1fr; }
+  .oc-about, .oc-contact, .oc-edu, .oc-venture__pillars, .oc-form__row { grid-template-columns: 1fr; }
+  .oc-projects > .oc-card { flex-basis: 86%; }
+  .oc-rail-bar { margin-top: -26px; }
   .oc-net { display: none; }
   .oc-hero__hint { display: none; }
   .oc-stat__v { font-size: 30px; }
