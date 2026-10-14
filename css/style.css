@@ -381,7 +381,6 @@ html.lenis body {
 .oc-node.is-run { border-color: var(--accent); background: #241f14; color: var(--accent); }
 .oc-node.is-run .oc-node__label { color: var(--text); }
 .oc-node.is-done .oc-node__ok { transform: scale(1); }
-.oc-card--flow .oc-card__links .oc-dim { font-size: 12px; }
 
 .oc-card__body { padding: 20px 18px 0; flex: 1; }
 .oc-card__body h3 { margin-top: 6px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }

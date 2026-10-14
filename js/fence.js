@@ -815,7 +815,7 @@ function journalScene() {
     ],
     flows: [{ points: orbit, color: SIGNAL, count: 3, speed: 0.1 }],
     notes: [
-      { anchor: [-1.1, 0.27, -0.6], title: 'IJISRT · Vol. 8 Issue 12', body: 'Published Dec 2023' },
+      { anchor: [-1.1, 0.27, -0.6], title: 'IJISRT · Vol. 8 Issue 12', body: 'International Journal of Innovative Science and Research Technology, Dec 2023' },
       { anchor: [1.6, 3.2, 0.2], title: 'AI for data protection', body: 'Safeguarding digital assets' },
     ],
   };
