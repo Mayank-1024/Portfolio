@@ -130,6 +130,28 @@
       edges: [['tick', 'ads'], ['tick', 'cmp'], ['tick', 'rss'], ['ads', 'map'], ['cmp', 'map'], ['rss', 'map'],
         ['map', 'qc'], ['qc', 'csv'], ['qc', 'report']],
     },
+    'cw-lab': {
+      nodes: [
+        { id: 'ads', x: 13, y: 28, icon: 'database', label: '156 ads', kind: 'trigger' },
+        { id: 'labels', x: 13, y: 72, icon: 'list-checks', label: 'Hand labels' },
+        { id: 'judge', x: 45, y: 28, icon: 'claude', label: 'Claude judge', kind: 'ai' },
+        { id: 'parse', x: 77, y: 28, icon: 'braces', label: 'Strict parser', top: true },
+        { id: 'score', x: 105, y: 50, icon: 'split', label: 'Score' },
+        { id: 'report', x: 137, y: 50, icon: 'file-spreadsheet', label: 'Accuracy · ECE' },
+      ],
+      edges: [['ads', 'judge'], ['judge', 'parse'], ['parse', 'score'], ['labels', 'score'], ['score', 'report']],
+    },
+    'nuscenes': {
+      nodes: [
+        { id: 'data', x: 13, y: 46, icon: 'database', label: 'nuScenes', kind: 'trigger' },
+        { id: 'devkit', x: 45, y: 46, icon: 'python', label: 'Devkit convert' },
+        { id: 'files', x: 77, y: 46, icon: 'file-json', label: 'JSON + points', top: true },
+        { id: 'viewer', x: 109, y: 46, icon: 'typescript', label: 'Three.js viewer', kind: 'ai' },
+        { id: 'boxes', x: 137, y: 20, icon: 'list-checks', label: '3D boxes' },
+        { id: 'lidar', x: 137, y: 72, icon: 'split', label: 'LiDAR points' },
+      ],
+      edges: [['data', 'devkit'], ['devkit', 'files'], ['files', 'viewer'], ['viewer', 'boxes'], ['viewer', 'lidar']],
+    },
     'ad-review': {
       nodes: [
         { id: 'hook', x: 13, y: 46, icon: 'webhook', label: 'Webhook', kind: 'trigger' },
