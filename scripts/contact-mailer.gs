@@ -13,7 +13,10 @@
  */
 
 const RECIPIENT = "mayankbhadrasen244@gmail.com"
-const SHEET_NAME = "Submissions" // used only when the script is bound to a spreadsheet
+const SHEET_NAME = "Submissions"
+// Paste the ID of the Google Sheet that should log every submission (the long part of its URL between /d/ and /edit).
+// Leave empty if this script was created from inside that sheet (Extensions -> Apps Script): it then logs there.
+const SHEET_ID = ""
 const MAX_LEN = { name: 120, email: 200, subject: 200, message: 5000 }
 
 function doPost(e) {
@@ -79,8 +82,8 @@ function parse_(e) {
 }
 
 function logToSheet_(row) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet && SpreadsheetApp.getActiveSpreadsheet()
-  if (!ss) return
+  const ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet()
+  if (!ss) return // standalone script with no SHEET_ID: email only
   const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME)
   if (sheet.getLastRow() === 0) sheet.appendRow(["Received", "Name", "Email", "Subject", "Message"])
   sheet.appendRow(row)
