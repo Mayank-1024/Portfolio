@@ -1,6 +1,6 @@
 # Mayank Bhadrasen — Portfolio
 
-Personal site for [mayankbhadrasen.com](https://mayankbhadrasen.com): full-stack developer & AI automation engineer, co-founder of [Qixazow](https://qixazow.com).
+Personal site for [mayankbhadrasen.com](https://mayankbhadrasen.com): full-stack developer & AI automation engineer.
 
 A static site: plain HTML, CSS and JavaScript with no build step. A Three.js chain of blocks in the hero (click a block to jump to its section), experience and education as blocks that each draw a wireframe scene of what was built there, an interactive Stack bento showing where each tool was used, and an obsidian + champagne-gold palette.
 
@@ -28,7 +28,6 @@ assets/
   fonts/                Space Grotesk + JetBrains Mono (woff2)
   logos/                skill logos (SVG, tinted via CSS mask)
   images/               profile photo and project screenshots
-  GradResume_Mayank.pdf
 scripts/contact-mailer.gs   Google Apps Script that emails form submissions
 favicon.svg  robots.txt  sitemap.xml
 ```

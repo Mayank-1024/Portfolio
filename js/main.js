@@ -306,20 +306,6 @@
         ScrollTrigger.create({ trigger: v, start: 'top 88%', once: true, onEnter: function () { countUp(v); } });
       });
 
-      // ── Qixazow: the card grows into place, the name types out.
-      gsap.fromTo('.oc-venture', { scale: 0.9, autoAlpha: 0.3 }, {
-        scale: 1, autoAlpha: 1, ease: 'none',
-        scrollTrigger: { trigger: '.oc-venture', start: 'top 95%', end: 'top 40%', scrub: true },
-      });
-      splitReveal($('.oc-venture__name', page), 'chars', {
-        yPercent: 110, duration: 1, stagger: 0.04, ease: 'expo.out',
-        scrollTrigger: { trigger: '.oc-venture', start: 'top 65%' },
-      });
-      gsap.from('.oc-venture__pillars > div', {
-        y: 30, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: 'expo.out',
-        scrollTrigger: { trigger: '.oc-venture__pillars', start: 'top 85%' },
-      });
-
       // ── Experience: the chain rail fills as you scroll; each block's details follow its drawing.
       gsap.fromTo('.oc-exps__fill', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.oc-exps', start: 'top 60%', end: 'bottom 60%', scrub: true } });
       q('.oc-exp').forEach(function (block) {
@@ -336,7 +322,6 @@
       var offs = [
         bindMagnetic(page, '.oc-btn, .oc-socials a, .oc-brand__mark', 0.25),
         bindTilt(page, '.oc-card', 5),
-        bindSpotlight($('.oc-venture', page)),
       ];
       return function () { offs.forEach(function (off) { off(); }); };
     });

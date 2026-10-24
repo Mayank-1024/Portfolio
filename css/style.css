@@ -291,32 +291,6 @@ html.lenis body {
 .oc-stat__v { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; color: var(--accent-2); }
 .oc-stat__l { margin-top: 6px; color: var(--muted); font-size: 14px; line-height: 1.45; }
 
-/* Qixazow */
-.oc-venture { position: relative; display: block; border-radius: 22px; padding: 1px; overflow: hidden; isolation: isolate; }
-.oc-venture::before {
-  content: ""; position: absolute; inset: -60%; z-index: -1;
-  background: conic-gradient(from 0deg, transparent 0 60%, var(--accent) 72%, var(--signal) 80%, transparent 90%);
-  animation: oc-spin 6s linear infinite;
-}
-@keyframes oc-spin { to { transform: rotate(360deg); } }
-.oc-venture__inner {
-  position: relative; border-radius: 21px; padding: clamp(28px, 5vw, 56px);
-  background:
-    radial-gradient(420px circle at var(--sx, 85%) var(--sy, 0%), rgba(226, 184, 103, 0.22), transparent 70%),
-    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 48px,
-    #111318;
-}
-.oc-venture__top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
-.oc-venture__name { margin-top: 26px; font-size: clamp(56px, 10vw, 128px); font-weight: 700; letter-spacing: -0.05em; line-height: 0.9; }
-.oc-venture__sum { margin-top: 18px; max-width: 640px; color: var(--soft); font-size: 18px; line-height: 1.6; }
-.oc-venture__pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
-.oc-venture__pillars > div { display: flex; flex-direction: column; gap: 6px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(11, 12, 15, 0.5); transition: border-color 0.2s; }
-.oc-venture:hover .oc-venture__pillars > div { border-color: var(--line-strong); }
-.oc-venture__pillars strong { font-size: 18px; }
-.oc-venture__pillars > div > span:last-child { color: var(--muted); font-size: 14px; }
-.oc-venture__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 30px; color: var(--signal); font-size: 13px; }
-.oc-venture:hover .oc-venture__cta { text-decoration: underline; text-underline-offset: 4px; }
-
 /* Projects */
 /* Projects rail: snap-scrolling cards, three per view on desktop; newest first. */
 .oc-rail-bar { display: flex; align-items: center; gap: 18px; margin: -18px 0 18px; }
@@ -591,7 +565,7 @@ html.lenis body {
   .oc-exp__node { left: -28px; }
   .oc-wire__legend { grid-template-columns: 1fr; gap: 5px; padding-top: 24px; }
   .oc-exp__scene { aspect-ratio: 4 / 5; }
-  .oc-about, .oc-contact, .oc-edu, .oc-venture__pillars, .oc-form__row { grid-template-columns: 1fr; }
+  .oc-about, .oc-contact, .oc-edu, .oc-form__row { grid-template-columns: 1fr; }
   .oc-projects > .oc-card { flex-basis: 86%; }
   .oc-rail-bar { margin-top: -26px; }
   .oc-net { display: none; }

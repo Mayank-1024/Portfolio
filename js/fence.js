@@ -253,81 +253,6 @@ function dashed(ink, a, b, dashes = 8) {
     );
   }
 }
-/* ── Qixazow: an n8n workflow — trigger → Claude agent → publication / consulting / video ── */
-function workflowScene() {
-  const grid = floorGrid(4.5, 3.2);
-  const trigger = new Ink();
-  const agent = new Ink();
-  const subs = new Ink();
-  const wiresIn = new Ink();
-  const wiresOut = new Ink();
-  const outputs = new Ink();
-  const glyphs = new Ink();
-  // Trigger node with a lightning glyph on top.
-  trigger.box(1.1, 0.35, 0.9, -3.4, 0, 0);
-  glyphs.path([
-    [-3.3, 0.36, -0.28],
-    [-3.5, 0.36, 0.02],
-    [-3.3, 0.36, 0.02],
-    [-3.5, 0.36, 0.3],
-  ]);
-  // Claude agent node, larger, with a starburst glyph.
-  agent.box(1.8, 0.48, 1.2, -0.6, 0, 0);
-  for (let i = 0; i < 4; i++) {
-    const a = (i / 4) * Math.PI;
-    agent.line([-0.6 - Math.cos(a) * 0.32, 0.49, -Math.sin(a) * 0.32], [-0.6 + Math.cos(a) * 0.32, 0.49, Math.sin(a) * 0.32]);
-  }
-  // Memory + tools sub-nodes, hanging off the agent with dashed links.
-  subs.box(0.8, 0.24, 0.6, -1.3, 0, 2.3);
-  subs.box(0.8, 0.24, 0.6, 0.1, 0, 2.3);
-  dashed(subs, [-1.0, 0.12, 0.6], [-1.3, 0.12, 2.0]);
-  dashed(subs, [-0.2, 0.12, 0.6], [0.1, 0.12, 2.0]);
-  // Outputs: the three Qixazow pillars.
-  const outs = [
-    [2.9, 0, -2.0],
-    [2.9, 0, 0],
-    [2.9, 0, 2.0],
-  ];
-  outs.forEach(([x, , z]) => outputs.box(1.3, 0.35, 0.85, x, 0, z));
-  // publication: text lines · consulting: two speech cards · video: play triangle
-  for (let i = 0; i < 3; i++) glyphs.line([2.6, 0.36, -2.2 + i * 0.18], [3.2, 0.36, -2.2 + i * 0.18]);
-  glyphs.floorRect(2.55, -0.25, 2.95, 0.1, 0.36);
-  glyphs.floorRect(2.85, -0.1, 3.25, 0.25, 0.36);
-  glyphs.path([
-    [2.75, 0.36, 1.75],
-    [3.15, 0.36, 2.0],
-    [2.75, 0.36, 2.25],
-    [2.75, 0.36, 1.75],
-  ]);
-  // Wires between ports.
-  const inPath = curve([-2.85, 0.18, 0], [-1.5, 0.18, 0], 10);
-  wiresIn.path(inPath);
-  const outPaths = outs.map(([x, , z]) => curve([0.3, 0.2, 0], [x - 0.65, 0.18, z]));
-  outPaths.forEach((p) => wiresOut.path(p));
-  [[-2.85, 0.18, 0], [-1.5, 0.18, 0], [0.3, 0.2, 0], ...outs.map(([x, , z]) => [x - 0.65, 0.18, z])].forEach(([x, y, z]) => wiresIn.ring(x, y, z, 0.08, 10));
-  return {
-    view: 3.7,
-    target: [0, 0.6, 0],
-    yaw: -0.15,
-    layers: [
-      { ink: grid, color: BONE, opacity: 0.08, at: [0, 0.25] },
-      { ink: trigger, color: BONE, at: [0.1, 0.3] },
-      { ink: wiresIn, color: BONE, opacity: 0.7, at: [0.25, 0.42] },
-      { ink: agent, color: ACCENT, opacity: 1, at: [0.35, 0.58] },
-      { ink: subs, color: BONE, opacity: 0.6, at: [0.5, 0.72] },
-      { ink: wiresOut, color: BONE, opacity: 0.7, at: [0.58, 0.8] },
-      { ink: outputs, color: BONE, at: [0.66, 0.9] },
-      { ink: glyphs, color: SIGNAL, opacity: 0.95, at: [0.8, 1] },
-    ],
-    flows: outPaths.map((p) => ({ points: [...inPath, ...p], color: SIGNAL, count: 2, speed: 0.16 })),
-    notes: [
-      { anchor: [-3.4, 0.36, 0], title: 'Trigger', body: 'Idea or client request' },
-      { anchor: [-0.6, 0.5, 0], title: 'Claude agent', body: 'Orchestrated in n8n' },
-      { anchor: [-0.6, 0.25, 2.3], title: 'Memory + tools', body: 'Context and integrations' },
-      { anchor: [2.9, 0.36, 0], title: 'Output', body: 'Guides · consulting · video' },
-    ],
-  };
-}
 /* ── VeraAI: the room shell inks in, then furniture is placed into it ── */
 function interiorScene() {
   const W = 4,
@@ -609,7 +534,6 @@ function hardwareScene() {
   };
 }
 const EXPERIENCE_SCENES = {
-  workflow: workflowScene,
   interior: interiorScene,
   org: orgScene,
   hardware: hardwareScene,
