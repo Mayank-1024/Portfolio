@@ -326,6 +326,16 @@
       return function () { offs.forEach(function (off) { off(); }); };
     });
 
+    // ── Project clips: play only while on screen, and never when the visitor prefers reduced motion (the poster stays).
+    q('video[data-inview-play]').forEach(function (v) {
+      if (reduced() || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { var played = v.play(); if (played) played.catch(function () {}); } else v.pause();
+        });
+      }, { threshold: 0.35 }).observe(v);
+    });
+
     page.classList.add('is-ready');
   }
 

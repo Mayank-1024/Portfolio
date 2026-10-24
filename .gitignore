@@ -19,6 +19,8 @@ Thumbs.db
 *.sketch
 *.mov
 *.mp4
+# small web clips the site plays (keep each under ~2 MB)
+!assets/images/*.mp4
 *.zip
 
 # ---- Local tooling (Claude Code, Vercel) ----
