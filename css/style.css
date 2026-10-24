@@ -313,6 +313,7 @@ html.lenis body {
 .oc-projects:focus-visible { outline: 1px solid var(--line-strong); outline-offset: -8px; border-radius: 18px; }
 .oc-projects.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .oc-projects > .oc-card { flex: 0 0 calc((100% - 2 * var(--gap)) / 3); scroll-snap-align: start; }
+.oc-projects > .oc-page { flex: 0 0 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); align-content: start; scroll-snap-align: start; }
 .oc-card {
   position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; background: var(--panel);
   overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;

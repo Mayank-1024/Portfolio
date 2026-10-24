@@ -34,10 +34,32 @@
     var next = $('[data-rail="next"]');
     var bar = $('.oc-rail-progress');
 
+    // On wide screens the cards are grouped into pages of 6 (3 across, 2 down) and the arrows move a page.
+    // Narrower screens keep one row of cards. Order comes from the HTML: newest project first.
+    var PER_PAGE = 6;
+    var wide = window.matchMedia('(min-width: 1001px)');
+    var cards = $$('.oc-card', rail);
+    var paginate = function () {
+      $$('.oc-page', rail).forEach(function (pg) { pg.remove(); });
+      if (wide.matches) {
+        for (var i = 0; i < cards.length; i += PER_PAGE) {
+          var pg = document.createElement('div');
+          pg.className = 'oc-page';
+          cards.slice(i, i + PER_PAGE).forEach(function (c) { pg.appendChild(c); });
+          rail.appendChild(pg);
+        }
+      } else {
+        cards.forEach(function (c) { rail.appendChild(c); });
+      }
+      rail.scrollLeft = 0;
+    };
+    paginate();
+    wide.addEventListener('change', function () { paginate(); update(); });
+
     var step = function () {
-      var card = $('.oc-card', rail);
+      var unit = $('.oc-page', rail) || $('.oc-card', rail);
       var gap = parseFloat(getComputedStyle(rail).columnGap) || 20;
-      return card ? card.getBoundingClientRect().width + gap : rail.clientWidth;
+      return unit ? unit.getBoundingClientRect().width + gap : rail.clientWidth;
     };
     var update = function () {
       var max = rail.scrollWidth - rail.clientWidth;

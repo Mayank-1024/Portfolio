@@ -1368,7 +1368,37 @@
             <button type="button" class="oc-rail-btn" data-rail="next" aria-label="Next projects"><i class="oc-logo" style="--s:18px;-webkit-mask-image:url(assets/logos/chevron-right.svg);mask-image:url(assets/logos/chevron-right.svg)" aria-hidden="true"></i></button>
           </div>
         </div>
-        <div class="oc-projects" data-lenis-prevent-horizontal tabindex="0" aria-label="Projects. Scroll sideways or use the arrows to see more.">
+        <div class="oc-projects" data-lenis-prevent-horizontal tabindex="0" aria-label="Projects, newest first. Scroll sideways or use the arrows to see more.">
+          <article class="oc-card" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Tool</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x9d2f40…b18e">0x9d2f40…b18e</span>
+            </div>
+            <div class="oc-card__img">
+              <video src="assets/images/nuscenes-explorer.mp4" poster="assets/images/nuscenes-explorer.jpg" muted loop playsinline preload="metadata" data-inview-play aria-label="nuScenes Scene Explorer running on nuScenes-mini: a LiDAR point cloud with class-coloured 3D boxes above, and the same boxes projected into the front cameras below, with one selected barrier highlighted in both. The clip plays the scene while the 3D view orbits." width="800" height="500"></video>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">TypeScript · 3D visualization</span>
+              <h3>nuScenes Scene Explorer</h3>
+              <p>A browser tool for Motional's nuScenes driving data: LiDAR and 3D boxes beside all six cameras, with boxes and LiDAR projected onto the images. Click an object in any view to select it everywhere. Runs on nuScenes-mini (404 keyframes, 14M points). Data: nuScenes by Motional, CC BY-NC-SA 4.0.</p>
+              <ul class="oc-tags"><li>Vue 3</li><li>TypeScript</li><li>Three.js</li><li>Python</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/nuscenes-scene-explorer" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Research</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x5a91e2…7c03">0x5a91e2…7c03</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="cw-lab" role="img" aria-label="Diagram: 156 ads and human labels feed an Inspect eval; Claude judges each ad with a stated confidence, a strict parser checks the answer, and metrics report accuracy, confidently-wrong rate and calibration."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · LLM evaluation</span>
+              <h3>Confidently Wrong Lab</h3>
+              <p>How often is an LLM judge confidently wrong? Claude rates ads approve, review or block with a 0-100 confidence, and an Inspect eval scores it against my hand labels: accuracy, confidently-wrong rate and calibration error. Harness built with 10 passing tests; the labelled Claude run comes next.</p>
+              <ul class="oc-tags"><li>Python</li><li>Inspect</li><li>Claude</li><li>Evaluation</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/confidently-wrong-lab" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
           <article class="oc-card oc-card--flow" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
               <span>Workflow</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xc7f07d…32cd">0xc7f07d…32cd</span>
@@ -1413,36 +1443,6 @@
               <ul class="oc-tags"><li>n8n</li><li>Claude</li><li>HubSpot</li><li>Slack</li></ul>
             </div>
             <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/AI-Marketing-Ad-Review" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
-          </article>
-          <article class="oc-card oc-card--flow" data-scramble-host="true">
-            <div class="oc-card__meta oc-mono">
-              <span>Research</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x5a91e2…7c03">0x5a91e2…7c03</span>
-            </div>
-            <div class="oc-card__img">
-              <div class="oc-flow" data-flow="cw-lab" role="img" aria-label="Diagram: 156 ads and human labels feed an Inspect eval; Claude judges each ad with a stated confidence, a strict parser checks the answer, and metrics report accuracy, confidently-wrong rate and calibration."></div>
-            </div>
-            <div class="oc-card__body">
-              <span class="oc-mono oc-accent">Python · LLM evaluation</span>
-              <h3>Confidently Wrong Lab</h3>
-              <p>How often is an LLM judge confidently wrong? Claude rates ads approve, review or block with a 0-100 confidence, and an Inspect eval scores it against my hand labels: accuracy, confidently-wrong rate and calibration error. Harness built with 10 passing tests; the labelled Claude run comes next.</p>
-              <ul class="oc-tags"><li>Python</li><li>Inspect</li><li>Claude</li><li>Evaluation</li></ul>
-            </div>
-            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/confidently-wrong-lab" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
-          </article>
-          <article class="oc-card" data-scramble-host="true">
-            <div class="oc-card__meta oc-mono">
-              <span>Tool</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x9d2f40…b18e">0x9d2f40…b18e</span>
-            </div>
-            <div class="oc-card__img">
-              <video src="assets/images/nuscenes-explorer.mp4" poster="assets/images/nuscenes-explorer.jpg" muted loop playsinline preload="metadata" data-inview-play aria-label="nuScenes Scene Explorer running on nuScenes-mini: a LiDAR point cloud with class-coloured 3D boxes above, and the same boxes projected into the front cameras below, with one selected barrier highlighted in both. The clip plays the scene while the 3D view orbits." width="800" height="500"></video>
-            </div>
-            <div class="oc-card__body">
-              <span class="oc-mono oc-accent">TypeScript · 3D visualization</span>
-              <h3>nuScenes Scene Explorer</h3>
-              <p>A browser tool for Motional's nuScenes driving data: LiDAR and 3D boxes beside all six cameras, with boxes and LiDAR projected onto the images. Click an object in any view to select it everywhere. Runs on nuScenes-mini (404 keyframes, 14M points). Data: nuScenes by Motional, CC BY-NC-SA 4.0.</p>
-              <ul class="oc-tags"><li>Vue 3</li><li>TypeScript</li><li>Three.js</li><li>Python</li></ul>
-            </div>
-            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/nuscenes-scene-explorer" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </article>
           <article class="oc-card" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
