@@ -141,17 +141,6 @@
       ],
       edges: [['ads', 'judge'], ['judge', 'parse'], ['parse', 'score'], ['labels', 'score'], ['score', 'report']],
     },
-    'nuscenes': {
-      nodes: [
-        { id: 'data', x: 13, y: 46, icon: 'database', label: 'nuScenes', kind: 'trigger' },
-        { id: 'devkit', x: 45, y: 46, icon: 'python', label: 'Devkit convert' },
-        { id: 'files', x: 77, y: 46, icon: 'file-json', label: 'JSON + points', top: true },
-        { id: 'viewer', x: 109, y: 46, icon: 'typescript', label: 'Three.js viewer', kind: 'ai' },
-        { id: 'boxes', x: 137, y: 20, icon: 'list-checks', label: '3D boxes' },
-        { id: 'lidar', x: 137, y: 72, icon: 'split', label: 'LiDAR points' },
-      ],
-      edges: [['data', 'devkit'], ['devkit', 'files'], ['files', 'viewer'], ['viewer', 'boxes'], ['viewer', 'lidar']],
-    },
     'ad-review': {
       nodes: [
         { id: 'hook', x: 13, y: 46, icon: 'webhook', label: 'Webhook', kind: 'trigger' },
