@@ -7,7 +7,7 @@
  *   3. Deploy → New deployment → type "Web app"
  *        Execute as:      Me
  *        Who has access:  Anyone        ← required; anything else returns "Access Denied" to visitors
- *   4. Copy the /exec URL into NEXT_PUBLIC_CONTACT_ENDPOINT (or the fallback in lib/contact.ts).
+ *   4. Copy the /exec URL into CONTACT_ENDPOINT in js/config.js, commit and push.
  * To update later without changing the URL: Manage deployments → ✏️ Edit → Version: "New version".
  * Opening the /exec URL in a private window should show {"ok":true,"service":"portfolio-contact"}.
  */
