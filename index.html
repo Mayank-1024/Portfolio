@@ -1369,12 +1369,27 @@
           </div>
         </div>
         <div class="oc-projects" data-lenis-prevent-horizontal tabindex="0" aria-label="Projects, newest first. Scroll sideways or use the arrows to see more.">
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Agent</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x3e8c15…a94f">0x3e8c15…a94f</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="commerce-agent" role="img" aria-label="Diagram: a shopper message reaches a FastAPI service and a Celery worker on Redis; Claude answers through tool calls while fixed rules decide returns, a schema check validates the reply, and it is sent or escalated to a human."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · LLM agents</span>
+              <h3>Commerce Support Agent</h3>
+              <p>A support agent for a synthetic online store: Claude resolves shopper messages through tool calls (verified order lookup, product search, cited help-center answers, returns) while fixed rules decide every return. Replies are schema-checked with an escalate-to-human fallback; 102 tests, and 18 of 20 scenarios passed in the first real-model eval.</p>
+              <ul class="oc-tags"><li>Python</li><li>FastAPI</li><li>Celery</li><li>Claude</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/commerce-support-agent" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
           <article class="oc-card" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
               <span>App</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xca7b43…62c5">0xca7b43…62c5</span>
             </div>
             <div class="oc-card__img">
-              <img alt="Claims Triage Console: a queue of insurance claims ranked by triage score with flag chips, beside a claim detail panel showing the policy period, triage reasons, other claims on the policy and status actions." loading="lazy" width="1120" height="700" decoding="async" src="assets/images/claims-triage-console.jpg" />
+              <img alt="Claims Triage Console: open insurance claims ranked by triage score, each with its flags such as Outside policy period or Above coverage limit, beside the selected claim's triage panel explaining why it scored 55." loading="lazy" width="1120" height="700" decoding="async" src="assets/images/claims-triage-console.jpg" />
             </div>
             <div class="oc-card__body">
               <span class="oc-mono oc-accent">Vue 3 · GraphQL</span>

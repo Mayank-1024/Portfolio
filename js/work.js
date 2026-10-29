@@ -121,6 +121,21 @@
      ═══════════════════════════════════════════ */
 
   var FLOWS = {
+    'commerce-agent': {
+      nodes: [
+        { id: 'msg', x: 13, y: 50, icon: 'message-square-text', label: 'Message', kind: 'trigger' },
+        { id: 'api', x: 32, y: 50, icon: 'python', label: 'FastAPI', top: true },
+        { id: 'queue', x: 52, y: 50, icon: 'database', label: 'Queue' },
+        { id: 'claude', x: 74, y: 50, icon: 'claude', label: 'Claude', kind: 'ai' },
+        { id: 'tools', x: 96, y: 22, icon: 'braces', label: 'Tool calls', top: true },
+        { id: 'rules', x: 96, y: 78, icon: 'shield-check', label: 'Return rules' },
+        { id: 'check', x: 118, y: 50, icon: 'split', label: 'Validate', top: true },
+        { id: 'reply', x: 142, y: 28, icon: 'message-square-text', label: 'Reply' },
+        { id: 'human', x: 142, y: 72, icon: 'list-checks', label: 'Escalate' },
+      ],
+      edges: [['msg', 'api'], ['api', 'queue'], ['queue', 'claude'], ['claude', 'tools'], ['claude', 'rules'],
+        ['tools', 'check'], ['rules', 'check'], ['check', 'reply'], ['check', 'human']],
+    },
     applications: {
       nodes: [
         { id: 'tick', x: 13, y: 50, icon: 'clock', label: 'Schedule', kind: 'trigger' },
