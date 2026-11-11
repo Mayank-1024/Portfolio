@@ -121,6 +121,34 @@
      ═══════════════════════════════════════════ */
 
   var FLOWS = {
+    'hidden-tests': {
+      nodes: [
+        { id: 'task', x: 13, y: 50, icon: 'file-json', label: 'Task', kind: 'trigger' },
+        { id: 'box', x: 37, y: 50, icon: 'docker', label: 'Sandbox', top: true },
+        { id: 'solver', x: 64, y: 20, icon: 'claude', label: 'Claude solver', kind: 'ai', top: true },
+        { id: 'gold', x: 64, y: 50, icon: 'git-merge', label: 'Gold patch' },
+        { id: 'wrong', x: 64, y: 80, icon: 'braces', label: 'Wrong patches' },
+        { id: 'tests', x: 96, y: 50, icon: 'shield-check', label: 'Hidden tests', top: true },
+        { id: 'pass', x: 136, y: 29, icon: 'list-checks', label: 'Resolved' },
+        { id: 'fail', x: 136, y: 71, icon: 'filter', label: 'Rejected' },
+      ],
+      edges: [['task', 'box'], ['box', 'solver'], ['box', 'gold'], ['box', 'wrong'],
+        ['solver', 'tests'], ['gold', 'tests'], ['wrong', 'tests'], ['tests', 'pass'], ['tests', 'fail']],
+    },
+    'doc-intake': {
+      nodes: [
+        { id: 'doc', x: 13, y: 50, icon: 'file-json', label: 'Document', kind: 'trigger' },
+        { id: 'claude', x: 38, y: 50, icon: 'claude', label: 'Claude', kind: 'ai' },
+        { id: 'schema', x: 62, y: 50, icon: 'braces', label: 'Schema', top: true },
+        { id: 'cite', x: 88, y: 22, icon: 'shield-check', label: 'Citations', top: true },
+        { id: 'math', x: 88, y: 78, icon: 'list-checks', label: 'Sums · dates' },
+        { id: 'gate', x: 113, y: 50, icon: 'split', label: 'Confidence', top: true },
+        { id: 'ok', x: 142, y: 28, icon: 'sqlite', label: 'Accepted' },
+        { id: 'review', x: 142, y: 72, icon: 'react', label: 'Review queue' },
+      ],
+      edges: [['doc', 'claude'], ['claude', 'schema'], ['schema', 'cite'], ['schema', 'math'],
+        ['cite', 'gate'], ['math', 'gate'], ['gate', 'ok'], ['gate', 'review']],
+    },
     'commerce-agent': {
       nodes: [
         { id: 'msg', x: 13, y: 50, icon: 'message-square-text', label: 'Message', kind: 'trigger' },

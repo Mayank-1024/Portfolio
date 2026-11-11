@@ -1369,6 +1369,66 @@
           </div>
         </div>
         <div class="oc-projects" data-lenis-prevent-horizontal tabindex="0" aria-label="Projects, newest first. Scroll sideways or use the arrows to see more.">
+          <article class="oc-card" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Hackathon</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x7f1a3c…d24b">0x7f1a3c…d24b</span>
+            </div>
+            <div class="oc-card__img">
+              <img alt="LongTail finding view: a verified pedestrian partly hidden by a car in scene 021, with an evidence card citing its LiDAR measurements, six camera views with LiDAR points overlaid, and the bird's-eye LiDAR view." loading="lazy" width="980" height="612" decoding="async" src="assets/images/longtail.jpg" />
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · Multimodal agents</span>
+              <h3>LongTail</h3>
+              <p>Two-person hackathon build with Chethan Gowda (Meta Global AI Developer Hackathon): search driving logs in plain English, with every result checked against LiDAR. I built the search agent and planner, the model client (cache, cost ledger, spend cap), evidence cards, the FastAPI API and React web view, the eval runs and the demo; Chethan built perception and the LiDAR verifier. On 15 held-out queries, LiDAR checks raised precision from 0.088 to 0.20, at a recall cost (0.28 to 0.20).</p>
+              <ul class="oc-tags"><li>Python</li><li>FastAPI</li><li>React</li><li>SAM 3.1</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/Longtail" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="https://youtu.be/rPDpJZ9Zk8o" target="_blank" rel="noopener noreferrer">Demo video <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
+          <article class="oc-card" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Agent</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x4b6e92…0a17">0x4b6e92…0a17</span>
+            </div>
+            <div class="oc-card__img">
+              <img alt="Ad Budget Agent dashboard on synthetic data: a proposal queue of budget moves, each with the agent's reason, a risk badge and approve or reject buttons, above the campaigns table." loading="lazy" width="1120" height="700" decoding="async" src="assets/images/ad-budget-agent.jpg" />
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · Marketing agent</span>
+              <h3>Ad Budget Agent</h3>
+              <p>Proposes daily budget moves for synthetic DTC ad accounts: Claude reads ClickHouse metrics only through parameterized tool queries, a reviewer approves or rejects each move with memory kept in Postgres, and code enforces the guardrails (20% daily cap, brand caps, tracking freeze). Over 21 simulated days and 2 seeds it beat holding budgets by 9.2 to 11.2% on net revenue after spend. Synthetic simulator; built with Claude Code.</p>
+              <ul class="oc-tags"><li>Python</li><li>Claude</li><li>ClickHouse</li><li>PostgreSQL</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/ad-budget-agent" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Research</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0xd83f05…9c6a">0xd83f05…9c6a</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="hidden-tests" role="img" aria-label="Diagram: a coding task runs in a network-off Docker sandbox; a Claude solver's patch, the gold patch and deliberately wrong patches are graded by hidden tests, which mark each one resolved or rejected."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · Agent evaluation</span>
+              <h3>Hidden-Test Coding Tasks</h3>
+              <p>Three multi-file coding tasks for agents on the MIT jmespath library (a feature, a real type-comparison bug and a behavior-preserving refactor), each graded by hidden tests (100 fail-to-pass, 819 pass-to-pass) in a pinned, network-off Docker sandbox. One command verifies every task, and it rejected 8 of 8 deliberately wrong patches. Built with Claude Code.</p>
+              <ul class="oc-tags"><li>Python</li><li>Docker</li><li>Claude</li><li>pytest</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/hidden-test-tasks" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
+          <article class="oc-card oc-card--flow" data-scramble-host="true">
+            <div class="oc-card__meta oc-mono">
+              <span>Agent</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x2c95b7…e4f1">0x2c95b7…e4f1</span>
+            </div>
+            <div class="oc-card__img">
+              <div class="oc-flow" data-flow="doc-intake" role="img" aria-label="Diagram: a PDF or scan goes to Claude, which fills a pydantic schema; code checks each field's citation against the page text and verifies sums and dates, then a confidence gate auto-accepts the field or sends it to a human review queue."></div>
+            </div>
+            <div class="oc-card__body">
+              <span class="oc-mono oc-accent">Python · Document AI</span>
+              <h3>Document Intake Agent</h3>
+              <p>Extracts fields from invoices, W-2s and insurance loss runs, including degraded scans, with a confidence score and source citation per field. Code, not the model, checks each citation against the page text, verifies sums and dates, masks SSNs and routes uncertain fields to a review queue. On 39 synthetic documents (1,648 fields), Claude Haiku 5.5 got 99.2% of fields right at $0.0014 per document. Built with Claude Code.</p>
+              <ul class="oc-tags"><li>Python</li><li>Claude</li><li>FastAPI</li><li>React</li></ul>
+            </div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/document-intake-agent" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </article>
           <article class="oc-card oc-card--flow" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
               <span>Agent</span><span data-scramble="hover" data-glyphs="hex" data-duration="500" aria-label="0x3e8c15…a94f">0x3e8c15…a94f</span>
@@ -1442,7 +1502,7 @@
               <p>Every 3 days, collects new postings from 13 company career boards on Greenhouse, Ashby and Lever plus Remotive, RemoteOK and Jobicy, filters them by role and location, and appends only new jobs to Google Sheets with a health log. A dry run collected 3,773 jobs.</p>
               <ul class="oc-tags"><li>n8n</li><li>JavaScript</li><li>Google Sheets</li><li>REST APIs</li></ul>
             </div>
-            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/Applications-Made-Easy" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/Applications-Made-Easy" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="https://n8n.io/workflows/20804-collect-and-log-job-postings-from-greenhouse-ashby-lever-remotive-remoteok-jobicy-to-google-sheets/" target="_blank" rel="noopener noreferrer">n8n template <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </article>
           <article class="oc-card oc-card--flow" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
@@ -1457,7 +1517,7 @@
               <p>One pipeline for any data source: pulls two Hugging Face datasets and four RSS feeds, maps every record to one 16-column schema, runs quality checks and saves a clean CSV with a quality report. A real run: 285 clean records, 94.4% complete, in about 3 seconds.</p>
               <ul class="oc-tags"><li>n8n</li><li>JavaScript</li><li>Hugging Face</li><li>RSS</li></ul>
             </div>
-            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/One-Pipe" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/One-Pipe" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="https://n8n.io/workflows/20828-combine-marketing-rss-feeds-and-hugging-face-datasets-into-a-clean-csv/" target="_blank" rel="noopener noreferrer">n8n template <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </article>
           <article class="oc-card oc-card--flow" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
@@ -1472,7 +1532,7 @@
               <p>Routes AI-generated ad copy in about 6 seconds: a rules gatekeeper, then Claude scores channel fit, flags risky claims and decides approve, review or block, creating a HubSpot task and a Slack alert. 834 test requests, 0 failures, $0.0044 per ad.</p>
               <ul class="oc-tags"><li>n8n</li><li>Claude</li><li>HubSpot</li><li>Slack</li></ul>
             </div>
-            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/AI-Marketing-Ad-Review" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+            <div class="oc-card__links oc-mono"><a href="https://github.com/Mayank-1024/AI-Marketing-Ad-Review" target="_blank" rel="noopener noreferrer">Source <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><a href="https://n8n.io/workflows/20946-review-ai-ad-copy-with-claude-and-route-outcomes-to-hubspot-and-slack/" target="_blank" rel="noopener noreferrer">n8n template <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </article>
           <article class="oc-card" data-scramble-host="true">
             <div class="oc-card__meta oc-mono">
@@ -1741,6 +1801,6 @@
     <script src="js/config.js?v=20261014"></script>
     <script src="js/main.js?v=20261014"></script>
     <script type="module" src="js/fence.js?v=20261014"></script>
-    <script src="js/work.js?v=20261014"></script>
+    <script src="js/work.js?v=20261111"></script>
   </body>
 </html>
